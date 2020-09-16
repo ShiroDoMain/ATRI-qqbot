@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # ATRI Project
 ## 使用
 这是一个基于mirai，graia的qqbot  
@@ -19,3 +20,7 @@
 
 
 
+=======
+# ATRIProject-qqbot
+这是一个基于mirai,graia的qqbot
+>>>>>>> 4f053f310b989140780551ed2daa3a62376618e7
