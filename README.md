@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # ATRI Project
 ## 使用
 这是一个基于mirai，graia的qqbot  
@@ -15,12 +14,9 @@
 ## 使用须知  
 ~~注意身体~~
 
+## Note
+另一[开源项目](https://github.com/ShiroDoMain/TimeBot)，可自行搭配使用
+
 # 鸣谢
 感谢 [GraiaProject](https://github.com/GraiaProject) 的 [graia](https://github.com/GraiaProject/Application) 和 [mamoe](https://github.com/mamoe) 的 [mirai](https://github.com/mamoe/mirai)项目给我们带来了快乐
 
-
-
-=======
-# ATRIProject-qqbot
-这是一个基于mirai,graia的qqbot
->>>>>>> 4f053f310b989140780551ed2daa3a62376618e7
