@@ -32,15 +32,9 @@ app = GraiaMiraiApplication(
     broadcast=bcc,
     connect_info=Session(
         host="http://localhost:2333",
-<<<<<<< HEAD
         authKey="INITKEY50BuhiTH", #  这里填mirai-httpapi里设置的authkey
         # authKey="Shirodomain",
         account=123456789, # qq号
-=======
-        authKey="INITKEY50BuhiTH",
-        # authKey="Shirodomain",
-        account=1977987864,
->>>>>>> 4f053f310b989140780551ed2daa3a62376618e7
         websocket=True
     )
 )
