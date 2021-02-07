@@ -1,7 +1,7 @@
 # ATRI Project
 ## 使用
 这是一个基于mirai，graia的qqbot  
-你可以在 [Main](https://github.com/ShiroDoMain/ATRIProject-qqbot/blob/master/Main.py) 的头文件里设置你的bot参数构造  
+你可以在 [Main](https://github.com/ShiroDoMain/ATRIProject-qqbot/blob/master/Main.py) 文件里设置你的bot参数构造  
 ## 功能
 目前实现的功能有
 - 以图搜图  
