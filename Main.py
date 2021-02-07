@@ -2,7 +2,6 @@
 # @Time : 2020/7/29 5:03 下午
 # @Author : shiro
 # @Software: PyCharm
-from mirai import Mirai, Friend, Plain, Group, Image, At, Member, MessageChain, Source, BotMessage
 import asyncio
 import re
 import time
