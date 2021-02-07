@@ -18,10 +18,11 @@ def City():
         return file.read()
 
 
-def getData(city):
-    CityData = requests.get(f'https://lab.isaaclin.cn/nCoV/api/area?latest=1&province={city}').json()['results'][0]
-    # print(CityData)
-    return f'''地区(国家):{CityData['provinceName']}
+def getData(city,_init = 3):
+    try:
+        CityData = requests.get(f'https://lab.isaaclin.cn/nCoV/api/area?latest=1&province={city}').json()['results'][0]
+        # print(CityData)
+        return f'''地区(国家):{CityData['provinceName']}
 现存确诊人数{CityData['currentConfirmedCount']}人
 累计确诊人数{CityData['confirmedCount']}人
 疑似感染人数{CityData['suspectedCount']}人
@@ -29,6 +30,13 @@ def getData(city):
 死亡人数{CityData['deadCount']}人
 数据来源于丁香园(https://www.dxy.cn)
 最后统计于{time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime(CityData["updateTime"]/1000))}'''
+    except :
+        _init -= 1
+        if _init == 0:
+            return '数据拉取失败'
+        else:
+            return getData(city,_init)
+
 
 
 def getNews():

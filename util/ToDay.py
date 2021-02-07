@@ -5,19 +5,21 @@
 import requests, time
 
 
-def Today():
+def Today(_init = 3):
     Text = requests.get(r'http://www.ipip5.com/today/api.php?type=txt').text.split('\n')
     # 把最后那个不顺眼的干掉，别问，干掉就完事了
     Text.pop()
     Str = ''
     for text in Text:
         Str = Str + text + '\n'
-    if Str is not None and (len(Text) > 10):
-        # 即使新加了判定还是会偶尔返回None？smjb鬼玩意，傻逼py
+    if len(Text) > 10:
         return str(Str)
     else:
-        # 没错，递归，优雅就vans了
-        Today()
+        _init -= 1
+        if _init == 0:
+            return '数据拉取失败'
+        else:
+            return Today(_init)
 
 
 # Test

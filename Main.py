@@ -151,10 +151,9 @@ async def group_message_handler(bot: GraiaMiraiApplication, message: MessageChai
             await bot.sendGroupMessage(group.id, message.create([Plain(text='请发送要搜索的图片')]))
 
     # 查询疫情
-    # 只是为了装b用了Unicode
     if message.asDisplay().startswith('\u67e5\u8be2'):
         # 将消息中的 查询()疫情 提取出来
-        City_Find = re.compile(r'\u67e5\u8be2(\S+)\u75ab\u60c5').findall(message.asDisplay())
+        City_Find = re.compile(r'\u67e5\u8be2(\S+[^市省])[市省]?\u75ab\u60c5').findall(message.asDisplay())
         if City_Find[0] + '\n' not in GetCOVID19Data.City():
             # 遇到瞎输入或者输入的名称不完整时，提醒
             await bot.sendGroupMessage(group.id,
@@ -183,12 +182,10 @@ async def group_message_handler(bot: GraiaMiraiApplication, message: MessageChai
     elif message.asDisplay().startswith('TL'):
         # 这里对旧思路进行了优化,将user添加进去，顺便带上翻译的语言
         raw_language = re.compile(r'\s(\S+[\u8bed\u6587])\s(\S+[\u8bed\u6587])').findall(message.asDisplay())
-        # 算了就在这里处理吧(
         if member.id in Trans_member.keys():
             # 当重复时的处理
             await bot.sendGroupMessage(group.id, message.create([Plain(text='已经开始翻译了，请不要梅开二度(')]))
         elif len(raw_language) == 0:
-            # 不管瞎输入的傻逼
             pass
         else:
             # 处理消息
@@ -198,8 +195,7 @@ async def group_message_handler(bot: GraiaMiraiApplication, message: MessageChai
             if (Source_lang and target_lang) not in language.keys():
                 await bot.sendGroupMessage(group.id, message.create([Plain(text=f'不支持的语言,目前支持的语言有:{language_keys}')]))
             else:
-                # 这里就运用到链表结构了，dict的结构围{member.id:[Source_lang,target_lang]}
-                # 我tm简直就是天才
+                # 这里就运用到链表结构了，dict的结构为{member.id:[Source_lang,target_lang]}
                 Trans_member[member.id] = [Source_lang, target_lang]
                 await bot.sendGroupMessage(group.id,
                                            message.create([Plain(text=f'开始发送的{Source_lang}翻译成{target_lang}')]))
