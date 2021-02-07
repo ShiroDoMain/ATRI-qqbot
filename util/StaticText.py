@@ -5,9 +5,7 @@
 import qqai
 import requests
 import time
-
-appid = 123456 # 这里用的qqai的api，若要使用其他平台的自行更换api接口
-key = 'Your app key'
+from util import appid,key
 
 
 def getAcgList():
@@ -79,11 +77,15 @@ Strat_Txet = {
               '以图搜番' : lambda url:requests.get('https://trace.moe/api/search?url=%s'%url).json()['docs'][0],
 }
 
-def BotChat(msg):
+def BotChat(msg, _init = 3):
     result = qqai.TextChat(appid, key).ask(msg)
     print(result)
     if result.isspace():
-        return '今天吃啥？'
+        if _init == 0:
+            return '今天吃啥？'
+        else:
+            _init -= 1
+            return BotChat(msg, _init)
     else:
         return result
 
