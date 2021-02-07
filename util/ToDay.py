@@ -7,7 +7,6 @@ import requests, time
 
 def Today(_init = 3):
     Text = requests.get(r'http://www.ipip5.com/today/api.php?type=txt').text.split('\n')
-    # 把最后那个不顺眼的干掉，别问，干掉就完事了
     Text.pop()
     Str = ''
     for text in Text:
