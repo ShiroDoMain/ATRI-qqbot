@@ -8,7 +8,7 @@
 - 以图搜番  
 - 查询疫情
 - 查询天气 
-- 基础闲聊(请主要若要使用此功能需要到 [这里](https://github.com/ShiroDoMain/ATRIProject-qqbot/blob/master/util/StaticText.py) 修改api接口)
+- 基础闲聊(请主要若要使用此功能需要到 [这里](https://github.com/ShiroDoMain/ATRIProject-qqbot/blob/master/util/__init__.py) 修改api接口)
 - ~~随机涩图(由于没钱fq，我用的是自己的收藏的图，若有需求可以在 [这里](https://github.com/ShiroDoMain/ATRIProject-qqbot/blob/master/util/__init__.py) 修改)~~  
 - 还有好多好多功能(~~我忘了~~)
 ## 使用须知  
