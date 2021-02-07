@@ -1,6 +1,6 @@
+import json
+
 import requests
-import json, sys
-from prettytable import PrettyTable
 
 
 def get_data():
