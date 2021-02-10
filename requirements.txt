@@ -1,0 +1,6 @@
+requests='*'
+qqai='*'
+Pillow='*'
+aiohttp='*'
+saucenao_api='*'
+
