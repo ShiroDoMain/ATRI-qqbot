@@ -3,10 +3,9 @@
 # @Author : shiro
 # @Software: PyCharm
 import qqai
-from mirai import Plain, Source
 import re
-
-from util import appid, key, bot
+from graia.application.entry import Plain
+from util import appid, key
 
 language = {
     '汉语': 'zh',
@@ -58,7 +57,6 @@ def Trans(msg, source, target):
 
 
 async def send_TL(bot, group, source, msg, source_text, target_text):
-    # 重构，使用lambda将冗余的函数体干掉了
     TransLate_lang = lambda: \
         qqai.NLPTrans(appid, key, source=f'{language[source_text]}', target=f'{language[target_text]}').run(msg)[
             'data']  # Trans(msg,source_text,target_text)
