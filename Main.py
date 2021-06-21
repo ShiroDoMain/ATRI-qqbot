@@ -16,6 +16,7 @@ from util.SendImg import sendstick, stick_cmd
 from util.ShaDiao_ana import ana, SendShadiaoAna
 from util.StaticText import Text, Strat_Txet, BotChat
 from util.translate import language, language_keys
+from util.petpet import pet
 
 
 # 缓存区
@@ -26,14 +27,18 @@ Acg_search = []
 loop = asyncio.get_event_loop()
 
 bcc = Broadcast(loop=loop)
-# bot的头部构造，自行修改
+
+qq =  # qq号
+authKey =  # mirai-httpapi里设置的authkey
+host =  # mirai-http的host:port
+
+
 app = GraiaMiraiApplication(
     broadcast=bcc,
     connect_info=Session(
-        host="http://localhost:2333",
-        authKey="INITKEY50BuhiTH", #  这里填mirai-httpapi里设置的authkey
-        # authKey="Shirodomain",
-        account=123456789, # qq号
+        host=host,
+        authKey=authKey,
+        account=qq,
         websocket=True
     )
 )
@@ -75,28 +80,47 @@ async def group_message_handler(bot: GraiaMiraiApplication, message: MessageChai
     if message.asDisplay() in ana.keys():
         ShaDiao = asyncio.create_task(SendShadiaoAna(bot, group, message, message[Source][0]))
         await ShaDiao
-    if ('ATRI'  in message.asDisplay() or '亚托莉' in message.asDisplay()) and not message.has(At):
-        if message.asDisplay().startswith('ATRI') and message.asDisplay()[4:5] != "康":
+
+    # pet摸头
+    if message.asDisplay().startswith('摸') and message.has(At):
+        await pet(message[At][0].target)
+        await app.sendGroupMessage(group, MessageChain.create(
+            [Image.fromLocalFile(f'./temp/temp-{message[At][0].target}.gif')]))
+
+    # 闲聊
+    if 'ATRI' in message.asDisplay().upper() or '亚托莉' in message.asDisplay():
+        if message.asDisplay().startswith('ATRI'):
             if 'ATRI' in message.asDisplay():
-                text = re.compile(r'ATRI(.*)').findall(message.asDisplay())
+                text = re.compile(r'ATRI(.*)').findall(message[Plain][0].text)
             elif '亚托莉' in message.asDisplay():
-                text = re.compile(r'亚托莉(.*)').findall(message.asDisplay())
+                text = re.compile(r'亚托莉(.*)').findall(message[Plain][0].text)
             if len(text) == 0:
-                await bot.sendGroupMessage(group.id, message.create([Plain(text=f'?')]), quote=message[Source][0])
+                await app.sendGroupMessage(group.id, MessageChain.create([Plain(text=f'?')]), quote=message[Source][0])
             else:
-                await bot.sendGroupMessage(group.id, message.create([Plain(text=f'{BotChat(text[0])}')]),
+                await app.sendGroupMessage(group.id, MessageChain.create([Plain(text=f'{BotChat(text[0])}')]),
                                            quote=message[Source][0])
         else:
-            await bot.sendGroupMessage(group.id, message.create(
-                [Plain(text=f'{BotChat(message.asDisplay().replace("亚托莉" or "ATRI", "你"))}')]), quote=message[Source][0])
-    if message.has(At) and message[At][0].target == 1977987864:
-        if group.id != 511091871:
-            if len(message[Plain][0].text) > 1:
-                await bot.sendGroupMessage(group.id,
-                                           message.create([Plain(text=f'{BotChat(message[Plain][0].text)}')]),
-                                           quote=message[Source][0])
-            else:
-                await app.sendGroupMessage(group.id, message.create([Plain(text='?')]))
+            await app.sendGroupMessage(group.id, MessageChain.create(
+                [Plain(text=f'{BotChat(message.asDisplay().replace("亚托莉" or "ATRI", "你"))}')]),
+                                       quote=message[Source][0])
+
+
+    # 还是闲聊，不过是以at的形式
+    if message.has(At) and message[At][0].target == qq:
+        if message[Plain][0].text.strip() in Text.keys():
+            ...
+        elif not message.has(Plain):
+            await app.sendGroupMessage(group.id,
+                                       MessageChain.create([Plain(text=f'你想说啥?')]),
+                                       quote=message[Source][0])
+
+        elif len(message[Plain][0].text) > 1:
+            await app.sendGroupMessage(group.id,
+                                       MessageChain.create([Plain(text=f'{BotChat(message[Plain][0].text)}')]),
+                                       quote=message[Source][0])
+        else:
+            await app.sendGroupMessage(group.id, MessageChain.create([Plain(text='?')]), quote=message[Source][0])
+
     if ('取消' in message.asDisplay()) and (member.id in (Img_search or Acg_search)):
         if member.id in Img_search:
             Img_search.remove(member.id)
@@ -194,7 +218,6 @@ async def group_message_handler(bot: GraiaMiraiApplication, message: MessageChai
             if (Source_lang and target_lang) not in language.keys():
                 await bot.sendGroupMessage(group.id, message.create([Plain(text=f'不支持的语言,目前支持的语言有:{language_keys}')]))
             else:
-                # 这里就运用到链表结构了，dict的结构为{member.id:[Source_lang,target_lang]}
                 Trans_member[member.id] = [Source_lang, target_lang]
                 await bot.sendGroupMessage(group.id,
                                            message.create([Plain(text=f'开始发送的{Source_lang}翻译成{target_lang}')]))
@@ -208,7 +231,7 @@ async def group_message_handler(bot: GraiaMiraiApplication, message: MessageChai
     # 历史上的今天
     if message.asDisplay() == 'ToDay':
         start = time.perf_counter()
-        result = ToDay.Today()  # 偶尔会返回None，别问我为什么，要问就问傻逼py
+        result = ToDay.Today()
         await bot.sendGroupMessage(group.id, message.create(
             [Plain(text=f'{result}\n本次查询耗时%0.2fs' % (time.perf_counter() - start))]))
 
