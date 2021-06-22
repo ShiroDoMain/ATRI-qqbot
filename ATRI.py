@@ -6,5 +6,8 @@
 # @Software: PyCharm
 from engine import atri
 if __name__ == '__main__':
-    atri.app.launch_blocking()
+    try:
+        atri.app.launch_blocking()
+    except KeyboardInterrupt:
+        atri.app.logger.info("exit")
 
