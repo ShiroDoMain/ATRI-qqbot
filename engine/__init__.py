@@ -40,6 +40,9 @@ class ATRI:
         self.qqai = self.cfg['qqai']['enable']
         self.setu = self.cfg['setu']['enable']
         self.sticker = self.cfg['sticker']['enable']
+        self.onlyGroup = self.cfg['onGroup']
+        self.shieldGroup = self.cfg['shieldGroup']
+        self.shieldFriend = self.cfg['shieldFriend']
 
         self.qqaiAppid = self.cfg['qqai']['appid'] if self.cfg['qqai']['enable'] else None
         self.qqaiKey = self.cfg['qqai']['appkey'] if self.cfg['qqai']['enable'] else None

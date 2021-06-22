@@ -42,6 +42,9 @@ class GroupEvent:
     _at = conversation['at']
     quote = conversation['quote']
     Sticker = atri.sticker
+    onlyGroup = atri.onlyGroup['list'] if atri.onlyGroup['enable'] else False
+    shieldGroup = atri.shieldGroup['list'] if atri.shieldGroup['enable'] else []
+
 
     @staticmethod
     def chainBuild(elements: list) -> MessageChain:
@@ -52,13 +55,17 @@ class GroupEvent:
     @atri.bcc.receiver(__doc__)
     async def messageEvent(message: MessageChain, member: Member, group: Group):
         """群组消息事件"""
-        global chain
         chain = None
         messagePlain = message.get(Plain)[0].text.strip() if message.has(Plain) else None
         atMember = [a.target for a in message.get(At)] if message.has(At) else []
 
         if member.id in atri.loadBlackList():
             return
+        if GroupEvent.onlyGroup and group.id not in GroupEvent.onlyGroup:
+            return
+        if group.id in GroupEvent.shieldGroup:
+            return
+
         if GroupEvent.conv:
             if not GroupEvent._at and messagePlain in GroupEvent.conversation['msg']:
                 chain = GroupEvent.chainBuild(
