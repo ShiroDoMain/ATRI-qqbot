@@ -24,9 +24,9 @@ class ATRI:
         self.app = GraiaMiraiApplication(
             broadcast=self.bcc,
             connect_info=Session(
-                host=self.cfg['host'],
-                authKey=self.cfg['authKey'],
-                account=self.cfg['qq'],
+                host=self.cfg['botConfig']['host'],
+                authKey=self.cfg['botConfig']['authKey'],
+                account=self.cfg['botConfig']['qq'],
                 websocket=True
             )
         )
