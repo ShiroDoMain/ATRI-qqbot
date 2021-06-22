@@ -2,17 +2,20 @@
 # @Time : 2020/7/30 9:11 上午
 # @Author : shiro
 # @Software: PyCharm
-import random, time, os
-from PIL import ImageFont, Image as img, ImageDraw
-from graia.application.entry import (Plain, Image, Source)
+import os
+import random
+import time
 
-from util import AcgImgPath
+from PIL import ImageFont, Image as img, ImageDraw
+from graia.application.entry import (Plain, Image)
+
+from engine import atri
 
 stick_name = {
     '爬': 'pa.gif',
     '你好ATRI': 'a.jpg',
-    '随机涩图': lambda: os.listdir(AcgImgPath)[
-        random.randrange(len(os.listdir(AcgImgPath)) - 1)],
+    '随机涩图': lambda: os.listdir(atri.cfg["setuPath"])[
+        random.randrange(len(os.listdir(atri.cfg["setuPath"])) - 1)],
 }
 stick_cmd = ['报时', '爬', '你好ATRI', '随机涩图', '贴贴']
 SendImgCount = {
@@ -78,7 +81,7 @@ async def sendstick(bot, group, source, msg_par, id=None):
             SendImgCount[id].append(1)
             imgname = stick_name['随机涩图']()
             await bot.sendGroupMessage(group.id,
-                                       msg_par.create([Image.fromLocalFile(f'{AcgImgPath}/%s' % imgname).asFlash()]))
+                                       msg_par.create([Image.fromLocalFile(f'{atri.cfg["setuPath"]}/%s' % imgname).asFlash()]))
             await bot.sendGroupMessage(group.id, msg_par.create(
                 [Plain('图片链接:https://www.pixiv.net/artworks/%s' % imgname[0:-7])]))
 
@@ -88,7 +91,7 @@ async def sendstick(bot, group, source, msg_par, id=None):
             imgname = stick_name['随机涩图']()
             await bot.sendGroupMessage(group.id, msg_par.create([
                 # 发！
-                Image.fromLocalFile(f'{AcgImgPath}/%s' % imgname).asFlash()]))
+                Image.fromLocalFile(f'{atri.cfg["setuPath"]}/%s' % imgname).asFlash()]))
 
             await bot.sendGroupMessage(group.id, msg_par.create(
                 [Plain('图片链接:https://www.pixiv.net/artworks/%s' % imgname[0:-7])]))

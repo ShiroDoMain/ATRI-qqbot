@@ -3,7 +3,7 @@
 # @Author : shiro
 # @Software: PyCharm
 import qqai
-from mirai import Plain
+from engine import Plain
 
 
 async def sendMessage(bot, groupId, source, msg):

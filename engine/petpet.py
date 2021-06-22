@@ -12,6 +12,8 @@ def _checkDir():
         os.mkdir("./temp")
     if not os.path.exists("./temp/feel"):
         os.mkdir("./temp/feel")
+
+
 frame_spec = [
     (27, 31, 86, 90),
     (22, 36, 91, 90),
@@ -77,7 +79,6 @@ async def pet(member_id, flip=False, squish=0, fps=20) -> None:
     for i in range(5):
         gif_frames.append(await make_frame(avatar, i, squish=squish, flip=flip))
     await save_gif(gif_frames, f'./temp/temp-{member_id}.gif', fps=fps)
-
 
 
 _checkDir()

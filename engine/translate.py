@@ -5,7 +5,7 @@
 import qqai
 import re
 from graia.application.entry import Plain
-from util import appid, key
+from engine import atri
 
 language = {
     '汉语': 'zh',
@@ -58,7 +58,7 @@ def Trans(msg, source, target):
 
 async def send_TL(bot, group, source, msg, source_text, target_text):
     TransLate_lang = lambda: \
-        qqai.NLPTrans(appid, key, source=f'{language[source_text]}', target=f'{language[target_text]}').run(msg)[
+        qqai.NLPTrans(atri.qqaiAppid,atri.qqaiKey, source=f'{language[source_text]}', target=f'{language[target_text]}').run(msg)[
             'data']  # Trans(msg,source_text,target_text)
     await bot.sendGroupMessage(
         group.id,
@@ -78,13 +78,10 @@ def QuickTranslate(msg):
         # 对翻译语言判定是属于什么语言
         if target_language not in language.values():
             return f"不支持的语言,目前支持的语言有{language_keys}"
-        source_language = qqai.nlp.translate.TextDetect(appid, key).run(trans_language)['data']['lang']
+        source_language = qqai.nlp.translate.TextDetect(atri.qqaiAppid, atri.qqaiKey).run(trans_language)['data']['lang']
         # 得到翻译结果
-        result = qqai.NLPTrans(appid, key, source_language, target_language).run(trans_language)['data']['target_text']
+        result = qqai.NLPTrans(atri.qqaiAppid, atri.qqaiKey, source_language, target_language).run(trans_language)['data']['target_text']
         return result
     except:
         return '发生了无法预知的错误'
 
-
-# result = QuickTranslate('把 白 翻译成 日语')
-# print(result)

@@ -5,7 +5,7 @@
 import qqai
 import requests
 import time
-from util import appid,key
+from engine import atri
 
 
 def getAcgList():
@@ -48,6 +48,7 @@ def getAcgList():
                                  result[5]['title'], result[5]['area'], result[5]['lastupdate_at'],
                                  result[6]['title'], result[6]['area'], result[6]['lastupdate_at'])
 
+
 Text = {
     "功能列表": 'ATRIbot使用方法：\n'
             '1:发送 [地方名]天气 获取当地天气;\n'
@@ -68,17 +69,18 @@ Text = {
            '分鐘的柔軟操，上了床，馬上摸鱼。摸鱼到天亮，早上起來就像嬰兒一樣不帶任何疲勞和壓力迎接第二天。醫生都說你沒有任何異常。你在向我說明你是一直希望保持內心平靜生活的人，'
            '不執著於勝負，不糾結於煩惱，不樹立讓你夜不能摸的敵人，這就是你對社會的態度，也知道這是你的幸福。不過就算打起來你也不會輸給任何人就是了。',
     '你是谁': '高性能吃饭机器人',
-    '运行时长': lambda : ((time.time() - 1589000279) / 86400),
-    '每日番剧' : getAcgList(),
-    '不够涩':'那你发啊kora！'
+    '运行时长': lambda: ((time.time() - 1589000279) / 86400),
+    '每日番剧': getAcgList(),
+    '不够涩': '那你发啊kora！'
 }
 
 Strat_Txet = {
-              '以图搜番' : lambda url:requests.get('https://trace.moe/api/search?url=%s'%url).json()['docs'][0],
+    '以图搜番': lambda url: requests.get('https://trace.moe/api/search?url=%s' % url).json()['docs'][0],
 }
 
-def BotChat(msg, _init = 3):
-    result = qqai.TextChat(appid, key).ask(msg)
+
+def BotChat(msg, _init=3):
+    result = qqai.TextChat(atri.qqaiAppid, atri.qqaiKey).ask(msg)
     print(result)
     if result.isspace():
         if _init == 0:
@@ -90,11 +92,7 @@ def BotChat(msg, _init = 3):
         return result
 
 
-end_cache = ('bot')
+end_cache = 'bot'
 End_Text = {
-    'bot':'诶？？？？？'
+    'bot': '诶？？？？？'
 }
-
-# print(BotChat('dsafgadsfa'))
-
-

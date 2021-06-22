@@ -4,7 +4,7 @@
 # @Software: PyCharm
 from urllib import request
 import re
-from util import cs
+from engine import cs
 
 
 def weater(name):
@@ -45,10 +45,4 @@ def weater(name):
                seven_days[2][0], seven_days[2][1], seven_days[2][2], seven_days[2][3],
                seven_days[3][0], seven_days[3][1], seven_days[3][2], seven_days[3][3],
                seven_days[4][0], seven_days[4][1], seven_days[4][2], seven_days[4][3])
-        # for day in seven_days:
-        #     tq = [day[0], day[1], day[2], day[3], '\n']
-        # return tq
-        # return '近三天天气',seven_days[0: 3]
 
-
-# print(weater('重庆'))

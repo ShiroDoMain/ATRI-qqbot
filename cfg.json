@@ -1,0 +1,36 @@
+{
+  "botConfig":{
+    "qq" :  null,
+    "authKey": "",
+    "host" : ""
+  },
+
+  "qqai": {
+    "enable": false,
+    "appid": null,
+    "appkey": ""
+  },
+
+  "master": null,
+
+  "setu": {
+    "enable": false,
+    "path": ""
+  },
+
+  "blackList": [],
+
+  "shieldGroup": {
+    "enable": false,
+    "list": []
+  },
+  "onlyGroup": {
+    "enable": false,
+    "list": []
+  },
+
+  "shieldFriend": {
+    "enable": false,
+    "list": []
+  }
+}

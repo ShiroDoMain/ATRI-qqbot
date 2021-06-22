@@ -1,6 +1,7 @@
-requests='*'
-qqai='*'
-Pillow='*'
-aiohttp='*'
-saucenao_api='*'
-
+moviepy
+requests
+qqai
+Pillow
+aiohttp
+saucenao_api
+numpy

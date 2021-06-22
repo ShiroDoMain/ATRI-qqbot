@@ -28,6 +28,5 @@ async def Wget(url: str, headers=None, typ="plain"):
 
 
 async def SendShadiaoAna(bot, group, message, source):
-    print(1)
     await bot.sendGroupMessage(group, message.create([Plain(text=f'{(await Wget(ana[message.asDisplay()]))[1]}')]),
                                quote=source)

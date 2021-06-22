@@ -3,7 +3,7 @@
 # @Author : shiro
 # @Software: PyCharm
 import asyncio
-import hashlib, re, requests
+import re
 
 import aiohttp
 import saucenao_api

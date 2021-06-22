@@ -62,32 +62,3 @@ def print_data_china():
                         str(data['chinaTotal']['dead']),
                         str(data['chinaAdd']['dead']))
 
-
-# def print_data_path_china():
-#     data = get_data()['areaTree'][0]['children']
-#     path_data = []
-#     path_china = []
-#     path = str(input('请输入你要查询的省份：'))
-#     for i in data:
-#         path_china.append(i['name'])
-#         path_data.append(i['children'])
-#     if path in path_china:
-#         num = path_china.index(path)
-#         data_path = path_data[num]
-#         print('{:^10}{:^10}{:^10}{:^10}{:^10}{:^10}{:^10}{:^10}{:^10}'.format('地区', '累计确诊人数', '相较于昨日确诊人数', '累计疑似病例',
-#                                                                               '相较于昨日疑似病例', '累计治愈人数', '相较于昨日治愈人数',
-#                                                                               '累计死亡人数', '相较于昨日死亡人数'))
-#         for i in data_path:
-#             name = i['name']
-#             today = i['today']
-#             total = i['total']
-#             a = '{:^10}{:^15}{:^15}{:^15}{:^15}{:^15}{:^15}{:^15}{:^15}'
-#             print(a.format(name, str(total['confirm']), str(today['confirm']), str(total['confirm']),
-#                            str(today['suspect']), str(total['heal']), str(today['heal']), str(total['dead']),
-#                            str(today['dead'])))
-#
-#
-# if __name__ == '__main__':
-#     print(get_data())
-#     print(print_data_china())
-    # print(print_data_path_china())
