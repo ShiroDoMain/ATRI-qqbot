@@ -5,20 +5,25 @@
     "host" : ""
   },
 
+  "master": null,
+  "blackList": [],
+
   "qqai": {
     "enable": false,
     "appid": null,
     "appkey": ""
   },
 
-  "master": null,
+  "sticker": {
+    "enable": true,
+    "path": "picture/sticker"
+  },
+
 
   "setu": {
     "enable": false,
     "path": ""
   },
-
-  "blackList": [],
 
   "shieldGroup": {
     "enable": false,

@@ -1,0 +1,10 @@
+{
+  "conversation": {
+    "enable": true,
+    "at": false,
+    "quote": false,
+    "msg": {
+      "hi": "hi!"
+    }
+  }
+}

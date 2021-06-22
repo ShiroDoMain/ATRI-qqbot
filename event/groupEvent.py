@@ -1,30 +1,96 @@
 # -*- coding: utf-8 -*-
 # @Time    : 2021/6/22 9:42 上午
 # @Author  : Shiro
-# @Site    : 
+# @Site    :
 # @File    : groupEvent.py
 # @Software: PyCharm
 """GroupMessage"""
-from engine import atri
-from graia.application.entry import *
+import json
+
+from engine import atri, sticker
+from graia.application.entry import (
+    GraiaMiraiApplication,
+    MessageChain,
+    Member,
+    Group,
+    MemberJoinEvent,
+    MemberLeaveEventQuit,
+    MemberLeaveEventKick,
+    MemberMuteEvent,
+    MemberUnmuteEvent,
+    BotGroupPermissionChangeEvent,
+    MemberPermissionChangeEvent,
+    MemberJoinRequestEvent,
+    BotInvitedJoinGroupRequestEvent,
+    At,
+    Plain,
+    Group,
+    Source,
+    Image
+
+)
 from graia.broadcast import Broadcast
 
 
 class GroupEvent:
     bcc: Broadcast
     app: GraiaMiraiApplication
+    with open('interaction.json', 'r') as c:
+        conversation = json.load(c)
+    conversation = conversation['conversation']
+    conv = conversation['enable']
+    _at = conversation['at']
+    quote = conversation['quote']
+    Sticker = atri.sticker
+
+    @staticmethod
+    def chainBuild(elements: list) -> MessageChain:
+        """构建消息链"""
+        return MessageChain.create(elements)
 
     @staticmethod
     @atri.bcc.receiver(__doc__)
-    async def messageEvent(message: MessageChain, member: Member, ):
+    async def messageEvent(message: MessageChain, member: Member, group: Group):
         """群组消息事件"""
-        pass
+        global chain
+        chain = None
+        messagePlain = message.get(Plain)[0].text.strip() if message.has(Plain) else None
+        atMember = [a.target for a in message.get(At)] if message.has(At) else []
+
+        if member.id in atri.loadBlackList():
+            return
+        if GroupEvent.conv:
+            if not GroupEvent._at and messagePlain in GroupEvent.conversation['msg']:
+                chain = GroupEvent.chainBuild(
+                    [
+                        Plain(GroupEvent.conversation['msg'][messagePlain])
+                    ]
+                )
+            elif GroupEvent._at and atri.qq in atMember:
+                chain = MessageChain.create(
+                    [
+                        Plain(GroupEvent.conversation['msg'][messagePlain])
+                    ]
+                )
+        if GroupEvent.Sticker:
+            patten = sticker.sticker(messagePlain)
+            if patten:
+                chain = MessageChain.create(
+                    [Image.fromLocalFile(atri.stickerPath + '/' + patten)]
+                )
+
+        if chain:
+            await atri.app.sendGroupMessage(group, chain, quote=message.get(Source)[0] if GroupEvent.quote else None)
+
+    @staticmethod
+    @atri.bcc.receiver(__doc__)
+    async def commandEvent(message: MessageChain, member: Member):
+        """指令事件"""
 
     @staticmethod
     @atri.bcc.receiver(MemberJoinEvent.__name__)
     async def joinEvent(event: MemberJoinEvent):
         """加群事件"""
-        pass
 
     @staticmethod
     @atri.bcc.receiver(MemberLeaveEventQuit.__name__)
@@ -58,10 +124,11 @@ class GroupEvent:
 
     @staticmethod
     @atri.bcc.receiver(MemberJoinRequestEvent.__name__)
-    async def joinGroupEvent(event:MemberJoinRequestEvent):
+    async def joinGroupEvent(event: MemberJoinRequestEvent):
         """Bot为管理员/群主时接受到加群事件"""
 
     @staticmethod
     @atri.bcc.receiver(BotInvitedJoinGroupRequestEvent.__name__)
     async def invitedGroupRequestEvent(event: BotInvitedJoinGroupRequestEvent):
         """Bot接受到邀请加群事件"""
+

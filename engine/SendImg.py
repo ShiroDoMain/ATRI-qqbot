@@ -24,7 +24,7 @@ SendImgCount = {
 
 
 def draw_text_img(now_time, ask):
-    with img.open('img/time.jpg') as image:
+    with img.open('picture/time.jpg') as image:
         img_draw = ImageDraw.Draw(image)
         time_font = ImageFont.truetype('Font/PUTHIAfont.ttf', 23)
         word_font = ImageFont.truetype('Font/HYXinHaiXingKaiW.ttf', 25)
@@ -33,7 +33,7 @@ def draw_text_img(now_time, ask):
         for word in ask:
             i += 25
             img_draw.text((87, i), word, font=word_font, fill=(0, 0, 0))
-        image.save("img/time_cache.jpg")
+        image.save("picture/time_cache.jpg")
 
 
 # 报时消息
@@ -69,7 +69,7 @@ async def sendstick(bot, group, source, msg_par, id=None):
         draw_text_img(time_24, send_ask)
 
         await bot.sendGroupMessage(group, msg_par.create([
-            Image.fromLocalFile('img/time_cache.jpg'),
+            Image.fromLocalFile('picture/time_cache.jpg'),
             Plain(text=f'\n现在是北京时间=>{time.strftime("%H点%M分%S秒", time.localtime(time.time()))}')]), quote=source)
     elif msg_par.asDisplay() == '随机涩图':
         # TODO ：偶尔会出现index out，等以后学会py了再修复,下 次 一 定
@@ -112,10 +112,10 @@ async def sendstick(bot, group, source, msg_par, id=None):
     elif msg_par.asDisplay() == '贴贴':
         i = random.randrange(0, 2)
         if i:
-            await bot.sendGroupMessage(group, msg_par.create([Image.fromLocalFile('img/yes.jpg')]))
+            await bot.sendGroupMessage(group, msg_par.create([Image.fromLocalFile('picture/yes.jpg')]))
         else:
-            await bot.sendGroupMessage(group, msg_par.create([Image.fromLocalFile('img/no.jpg')]))
+            await bot.sendGroupMessage(group, msg_par.create([Image.fromLocalFile('picture/no.jpg')]))
     else:  # msg_par.asDisplay() in stick_name.keys() and msg_par.asDisplay() != '随机涩图':
-        await bot.sendGroupMessage(group.id, msg_par.create([Image.fromLocalFile(f'img/%s' % stick_name[msg_par.asDisplay()])]))
+        await bot.sendGroupMessage(group.id, msg_par.create([Image.fromLocalFile(f'picture/%s' % stick_name[msg_par.asDisplay()])]))
 print(stick_name['你好ATRI'])
 

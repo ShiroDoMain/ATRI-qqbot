@@ -6,7 +6,11 @@
 # @Software: PyCharm
 """FriendMessage"""
 from engine import atri
-from graia.application.entry import *
+from graia.application.entry import (
+    Friend,
+    GraiaMiraiApplication,
+    MessageChain,
+    NewFriendRequestEvent)
 from graia.broadcast import Broadcast
 
 

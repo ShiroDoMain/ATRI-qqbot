@@ -6,18 +6,18 @@
 # @Software: PyCharm
 """TempMessage"""
 from engine import atri
-from graia.application.entry import *
+from graia.application.entry import (
+    GraiaMiraiApplication,
+    MessageChain
+)
 from graia.broadcast import Broadcast
 
 
 class TempEvent:
-    app:GraiaMiraiApplication
-    bcc:Broadcast
-
+    app: GraiaMiraiApplication
+    bcc: Broadcast
 
     @staticmethod
     @atri.bcc.receiver(__doc__)
-    async def tempMessage(message:MessageChain):
+    async def tempMessage(message: MessageChain):
         """临时消息事件"""
-
-
