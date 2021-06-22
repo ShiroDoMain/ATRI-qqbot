@@ -8,13 +8,19 @@ import asyncio
 import json
 import os
 import re
-from typing import List, Optional, Match
+from typing import (
+    List,
+    Optional,
+    Match
+)
 
 from graia.application.entry import (
     GraiaMiraiApplication,
     Session,
 )
 from graia.broadcast import Broadcast
+
+
 
 
 class ATRI:
@@ -40,7 +46,7 @@ class ATRI:
         self.qqai = self.cfg['qqai']['enable']
         self.setu = self.cfg['setu']['enable']
         self.sticker = self.cfg['sticker']['enable']
-        self.onlyGroup = self.cfg['onGroup']
+        self.onlyGroup = self.cfg['onlyGroup']
         self.shieldGroup = self.cfg['shieldGroup']
         self.shieldFriend = self.cfg['shieldFriend']
 
@@ -73,3 +79,19 @@ class ATRI:
 
 
 atri = ATRI()
+
+from event import (
+    friendEvent,
+    groupEvent,
+    tempEvent
+)
+class Core:
+    @staticmethod
+    def run():
+        ge: groupEvent.GroupEvent()
+        fe: friendEvent.FriendEvent()
+        te: tempEvent.TempEvent()
+        try:
+            atri.app.launch_blocking()
+        except KeyboardInterrupt:
+            atri.app.logger.info("exit")

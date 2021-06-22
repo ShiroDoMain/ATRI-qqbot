@@ -6,5 +6,5 @@
 # @Software: PyCharm
 from engine import Core
 if __name__ == '__main__':
-    Core.core.run()
+    Core.run()
 
