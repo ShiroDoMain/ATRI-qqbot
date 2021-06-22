@@ -7,12 +7,10 @@
 """GroupMessage"""
 import json
 
-from engine import atri, sticker
 from graia.application.entry import (
     GraiaMiraiApplication,
     MessageChain,
     Member,
-    Group,
     MemberJoinEvent,
     MemberLeaveEventQuit,
     MemberLeaveEventKick,
@@ -30,6 +28,8 @@ from graia.application.entry import (
 
 )
 from graia.broadcast import Broadcast
+
+from engine import atri, sticker
 
 
 class GroupEvent:
