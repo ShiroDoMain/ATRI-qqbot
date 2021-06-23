@@ -4,7 +4,7 @@
 # @Site    : 
 # @File    : Core.py
 # @Software: PyCharm
-from engine import Core
+from event import Core
 if __name__ == '__main__':
     Core.run()
 
