@@ -1,11 +1,22 @@
 {
   "botConfig":{
+    "botName": "ATRI",
+    "nameRouse": true,
     "qq" :  null,
     "authKey": "",
     "host" : ""
   },
 
-  "master": null,
+  "event": {
+    "groupEvent": true,
+    "friendEvent": true,
+    "tempEvent": true
+  },
+
+  "master": {
+    "enable": false,
+    "qq": null
+  },
   "blackList": [],
 
   "qqai": {
@@ -16,13 +27,16 @@
 
   "sticker": {
     "enable": true,
-    "path": "picture/sticker"
+    "path": "storage/picture/sticker/"
   },
 
+  "storagePath": "storage/",
 
   "setu": {
-    "enable": false,
-    "path": ""
+    "enable": true,
+    "flash": true,
+    "command": ["来点涩图"],
+    "path": "storage/picture/setu/"
   },
 
   "shieldGroup": {
