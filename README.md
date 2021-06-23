@@ -36,6 +36,8 @@ Hi！
 >>  
 >>  setu:  
 >>>   enable:默认false，指定为true时触发来点涩图事件  
+>>>   flash:默认true，指定为true时发送形式为闪照  
+>>>   command:str列表，指定触发命令
 >>>   path:涩图的存放位置 
 >>   
 >>  shieldGroup:  
