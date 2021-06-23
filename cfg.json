@@ -2,9 +2,10 @@
   "botConfig":{
     "botName": "ATRI",
     "nameRouse": true,
-    "qq" :  null,
+    "qq" :  ,
     "authKey": "",
-    "host" : ""
+    "host" : "",
+    "ws": true
   },
 
   "event": {
