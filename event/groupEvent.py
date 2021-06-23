@@ -29,19 +29,22 @@ from graia.application.entry import (
 )
 from graia.broadcast import Broadcast
 
-from engine import atri, sticker
+from engine import atri
+from model import sticker, acgTools
 
 
 class GroupEvent:
     bcc: Broadcast
     app: GraiaMiraiApplication
+    setu = acgTools.SetuTime()
     with open('interaction.json', 'r') as c:
         conversation = json.load(c)
     conversation = conversation['conversation']
     conv = conversation['enable']
     _at = conversation['at']
     quote = conversation['quote']
-    Sticker = atri.sticker
+    Sticker = atri.sticker["enable"]
+    StickerPath = atri.sticker['path']
     onlyGroup = atri.onlyGroup['list'] if atri.onlyGroup['enable'] else False
     shieldGroup = atri.shieldGroup['list'] if atri.shieldGroup['enable'] else []
 
@@ -83,8 +86,19 @@ class GroupEvent:
             patten = sticker.sticker(messagePlain)
             if patten:
                 chain = MessageChain.create(
-                    [Image.fromLocalFile(atri.stickerPath + '/' + patten)]
+                    [Image.fromLocalFile(GroupEvent.StickerPath + patten)]
                 )
+
+        if GroupEvent.setu.enable and messagePlain in GroupEvent.setu.cmd:
+            setu = GroupEvent.setu.randomSetu()
+            print(setu)
+            chain = MessageChain.create(
+                [
+                    Image.fromLocalFile(setu)
+                    if not GroupEvent.setu.flash else
+                    Image.fromLocalFile(setu).asFlash()
+                ]
+            )
 
         if chain:
             await atri.app.sendGroupMessage(group, chain, quote=message.get(Source)[0] if GroupEvent.quote else None)
@@ -138,4 +152,3 @@ class GroupEvent:
     @atri.bcc.receiver(BotInvitedJoinGroupRequestEvent.__name__)
     async def invitedGroupRequestEvent(event: BotInvitedJoinGroupRequestEvent):
         """Bot接受到邀请加群事件"""
-

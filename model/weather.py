@@ -4,7 +4,7 @@
 # @Software: PyCharm
 from urllib import request
 import re
-from engine import cs
+from model import cs
 
 
 def weater(name):

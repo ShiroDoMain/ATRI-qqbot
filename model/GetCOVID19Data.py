@@ -40,4 +40,4 @@ def getNews():
 内容:{fakeNews['body']}'''
     except:
         print('get news fail,retry')
-        getNews()
+        return getNews()

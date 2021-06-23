@@ -12,8 +12,8 @@ from graia.application.entry import (Plain, Image)
 from engine import atri
 
 stick_name = {
-    '爬': 'pa.gif',
-    '你好ATRI': 'a.jpg',
+    '爬': '爬.gif',
+    '你好ATRI': '啊？.jpg',
     '随机涩图': lambda: os.listdir(atri.cfg["setuPath"])[
         random.randrange(len(os.listdir(atri.cfg["setuPath"])) - 1)],
 }

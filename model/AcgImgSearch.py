@@ -4,7 +4,6 @@
 # @Software: PyCharm
 import asyncio
 import re
-
 import aiohttp
 import saucenao_api
 
