@@ -32,7 +32,6 @@ class ATRI:
         self.loop = asyncio.get_event_loop()
         self.bcc = Broadcast(loop=self.loop)
         self.qq = self.cfg['botConfig']['qq']
-        self.botName = self.cfg['botConfig']['botName']
         self.app = GraiaMiraiApplication(
             broadcast=self.bcc,
             connect_info=Session(
@@ -42,13 +41,12 @@ class ATRI:
                 websocket=True
             )
         )
-        self.qqai = self.cfg['qqai']
-        self.setu = self.cfg['setu']
-        self.sticker = self.cfg['sticker']
+        self.qqai = self.cfg['qqai']['enable']
+        self.setu = self.cfg['setu']['enable']
+        self.sticker = self.cfg['sticker']['enable']
         self.onlyGroup = self.cfg['onlyGroup']
         self.shieldGroup = self.cfg['shieldGroup']
         self.shieldFriend = self.cfg['shieldFriend']
-        self.storagePath = self.cfg['storagePath']
 
         self.qqaiAppid = self.cfg['qqai']['appid'] if self.cfg['qqai']['enable'] else None
         self.qqaiKey = self.cfg['qqai']['appkey'] if self.cfg['qqai']['enable'] else None
@@ -80,4 +78,20 @@ class ATRI:
 
 atri = ATRI()
 
+from event import (
+    friendEvent,
+    groupEvent,
+    tempEvent
+)
 
+
+class Core:
+    @staticmethod
+    def run():
+        ge: groupEvent.GroupEvent()
+        fe: friendEvent.FriendEvent()
+        te: tempEvent.TempEvent()
+        try:
+            atri.app.launch_blocking()
+        except KeyboardInterrupt:
+            atri.app.logger.info("exit")

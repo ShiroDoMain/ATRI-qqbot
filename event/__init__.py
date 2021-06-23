@@ -4,10 +4,11 @@
 # @Site    : 
 # @File    : __init__.py.py
 # @Software: PyCharm
-from graia.application.entry import (BotOnlineEvent,
-                                     BotOfflineEventDropped,
-                                     BotOfflineEventForce
-                                     )
+from graia.application.entry import (
+    BotOnlineEvent,
+    BotOfflineEventDropped,
+    BotOfflineEventForce
+)
 
 from engine import atri
 from event import (
