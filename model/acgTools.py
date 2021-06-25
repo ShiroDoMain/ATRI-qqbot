@@ -17,6 +17,7 @@ from engine import atri
 setu = atri.setu
 search = atri.illustrationSearch
 
+
 class SetuTime:
     path = setu['path']
     enable = setu['enable']
@@ -34,9 +35,10 @@ class SetuTime:
         return cls.path + s
 
 
-class acgSearch:
+class AcgSearch:
     enable = search['enable']
     cmd = search['command']
+
     @classmethod
     async def _IQDB(cls, fp):
         dataForm = (
@@ -116,3 +118,40 @@ class acgSearch:
                 pass
         await client.close()
         return searchResult
+
+
+class AnimeSearch:
+    BASE = 'https://trace.moe'
+    enable = atri.animeSearch['enable']
+    cmd = atri.animeSearch['command']
+
+    @classmethod
+    async def _wget(cls, url):
+        async with aiohttp.ClientSession() as client:
+            try:
+                response = await client.get(cls.BASE + '/api/search?url=' + url)
+                data = await response.json()
+                if response.status != 200:
+                    return False
+                data = data['docs'][0]
+                date = data['from']
+                _m = (date-(3600*(date*3600)))//60
+                _s = date%60
+                date = '%d:%s:%d'%(date%3600,_m if _m >= 10 else f'0{_m}',_s if _s >= 10 else f'0{_s}')
+                return '匹配番剧:%s\n匹配相似度:%.2f%s\n匹配位置:%s' % (
+                    data['title'],
+                    data['similarity'] * 10,
+                    '%',
+                    date
+                )
+            except not KeyboardInterrupt:
+                return False
+
+    @classmethod
+    async def animeSearch(cls, url, _count=3):
+        result = await cls._wget(url)
+        if not result:
+            while _count:
+                result = cls._wget(url)
+                _count -= 1
+        return result if result else 'Not Found'

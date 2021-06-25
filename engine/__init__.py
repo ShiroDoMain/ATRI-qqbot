@@ -48,6 +48,7 @@ class ATRI:
         self.shieldGroup = self.cfg['shieldGroup']
         self.shieldFriend = self.cfg['shieldFriend']
         self.illustrationSearch = self.cfg['illustrationSearch']
+        self.animeSearch = self.cfg['animeSearch']
 
         self.qqaiAppid = self.cfg['qqai']['appid'] if self.cfg['qqai']['enable'] else None
         self.qqaiKey = self.cfg['qqai']['appkey'] if self.cfg['qqai']['enable'] else None

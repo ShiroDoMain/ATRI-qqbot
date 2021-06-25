@@ -7,10 +7,10 @@ Hi！
 ## 配置
 >cfg.json:  
 >>  botConfig:  
->>>   botName:bot的名称
->>>   nameRouse:默认true，设置为true时可以通过设定的botName交互  
->>>   qq:Bot的qq  
->>>   authKey:Bot的authKey  
+>>>  botName:bot的名称
+>>>  nameRouse:默认true，设置为true时可以通过设定的botName交互  
+>>>  qq:Bot的qq  
+>>>  authKey:Bot的authKey  
 >>>   host:Bot的地址  
 >>>   ws:默认true，以websocket方式监听  
 >>  
@@ -39,7 +39,15 @@ Hi！
 >>>   enable:默认false，指定为true时触发来点涩图事件  
 >>>   flash:默认true，指定为true时发送形式为闪照    
 >>>   command:str列表，指定触发命令  
->>>   path:涩图的存放位置 
+>>>   path:涩图的存放位置  
+>>
+>>  illustrationSearch:  
+>>>   enable:默认true，指定为true时开启以图搜图  
+>>>   command:str列表，指定触发命令  
+>>
+>>  animeSearch:  
+>>>   enable:默认true，指定为true时开启以图搜番
+>>>   command:str列表,指定触发命令
 >>   
 >>  shieldGroup:  
 >>>   enable:默认false，指定为true时Bot屏蔽指定群聊

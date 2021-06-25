@@ -37,7 +37,8 @@ class GroupEvent:
     bcc: Broadcast
     app: GraiaMiraiApplication
     setu = acgTools.SetuTime()
-    search = acgTools.acgSearch()
+    acgSearch = acgTools.AcgSearch()
+    animeSearch = acgTools.AnimeSearch()
     with open('interaction.json', 'r') as c:
         conversation = json.load(c)
     conversation = conversation['conversation']
@@ -46,6 +47,7 @@ class GroupEvent:
     quote = conversation['quote']
     Sticker = atri.sticker["enable"]
     StickerPath = atri.sticker['path']
+
     onlyGroup = atri.onlyGroup['list'] if atri.onlyGroup['enable'] else False
     shieldGroup = atri.shieldGroup['list'] if atri.shieldGroup['enable'] else []
 
@@ -97,7 +99,7 @@ class GroupEvent:
                     Image.fromLocalFile(setu).asFlash()
                 ]
             )
-        if GroupEvent.search.enable and messagePlain == GroupEvent.search.cmd:
+        if GroupEvent.acgSearch.enable and messagePlain in GroupEvent.acgSearch.cmd:
             if not message.has(Image):
                 chain = MessageChain.create(
                     [
@@ -106,15 +108,30 @@ class GroupEvent:
                 )
             else:
                 urls = [image.url for image in message.get(Image)] if message.has(Image) else []
-                searchResultSet = await GroupEvent.search.ascii2d(urls)
+                searchResultSet = await GroupEvent.acgSearch.ascii2d(urls)
                 chain = MessageChain.create(
                     [
                         Plain('特徴検索:\n%s%s色合検索:\n%s' % ('\n'.join(searchResultSet['特徴検索']),
-                                                        '='*20,
+                                                        '=' * 20,
                                                         '\n'.join(searchResultSet['色合検索'])))
                     ]
                 )
             GroupEvent.quote = True
+        if GroupEvent.animeSearch.enable and messagePlain in GroupEvent.animeSearch.cmd:
+            if not message.has(Image):
+                chain = MessageChain.create(
+                    [
+                        Plain('未能在消息中找到图片')
+                    ]
+                )
+            else:
+                url = message.get(Image)[0].url
+                searchResultSet = await GroupEvent.animeSearch.animeSearch(url)
+                chain = MessageChain.create(
+                    [
+                        Plain(searchResultSet)
+                    ]
+                )
 
         if chain:
             await atri.app.sendGroupMessage(group, chain, quote=message.get(Source)[0] if GroupEvent.quote else None)

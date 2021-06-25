@@ -40,9 +40,14 @@
     "path": "storage/picture/setu/"
   },
 
-  "illustration": {
+  "illustrationSearch": {
     "enable": true,
-    "command": "以图搜图"
+    "command": ["以图搜图"]
+  },
+
+  "animeSearch": {
+    "enable": true,
+    "command": ["以图搜番"]
   },
 
   "shieldGroup": {
