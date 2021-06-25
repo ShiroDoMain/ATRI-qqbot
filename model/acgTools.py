@@ -3,12 +3,19 @@
 # @Author  : Shiro
 # @File    : acgTools.py
 # @Software: PyCharm
+import asyncio
 import os, random
+import re
+from typing import Union
+
+from aiohttp import ClientSession
+import aiohttp
+from typing.io import IO
 
 from engine import atri
 
 setu = atri.setu
-
+search = atri.illustrationSearch
 
 class SetuTime:
     path = setu['path']
@@ -25,3 +32,87 @@ class SetuTime:
         setuList = cls._loadSetu()
         s = setuList[random.randrange(len(setuList)) - 1]
         return cls.path + s
+
+
+class acgSearch:
+    enable = search['enable']
+    cmd = search['command']
+    @classmethod
+    async def _IQDB(cls, fp):
+        dataForm = (
+            ('file', fp),
+            ('MAX_FILE_SIZE', '8388608'),
+            ('service[]', '1'),
+            ('service[]', '2'),
+            ('service[]', '3'),
+            ('service[]', '4'),
+            ('service[]', '5'),
+            ('service[]', '6'),
+            ('service[]', '11'),
+            ('service[]', '13')
+        )
+        async with ClientSession().post(
+                url="https://iqdb.org/",
+                data=dataForm
+        ) as response:
+            if response.status != 200:
+                return
+            body = await response.text()
+        if 'No relevant matches' not in body:
+            result = re.compile(r'<th>(.*)</th>.*"(.*)"><i.*(\d..*%)').findall(body)
+            return '匹配:https:%s\n相似度:%s' % (result[0][1], result[0][2])
+        else:
+            return
+
+    @classmethod
+    async def ascii2d(
+            cls,
+            urls: Union[list, str] = None,
+            file: IO = None,
+            _loop=None
+    ):
+        """
+        ascii2d的以图搜图
+        :param url: 列表或者单个图片链接
+        :param file: 列表或者单个图片文件
+        :return:
+        """
+        BASE = 'http://ascii2d.nekomimi.icu'
+        searchResult = {
+            '色合検索': [],
+            '特徴検索': []
+        }
+
+        async def _process(Resultset: list):
+            return '画像链接:%s\n画像标题:%s\n画师链接:%s\n画师ID:%s\n出处:%s\n' % (
+                Resultset[0][0],
+                Resultset[0][1],
+                Resultset[0][2],
+                Resultset[0][3],
+                Resultset[0][4]
+            )
+
+        client = aiohttp.ClientSession()
+        if _loop:
+            asyncio.set_event_loop(_loop)
+        for _url in urls:
+            try:
+                pattern = r'<h6>\n.*\n.*"(.*)">(.*)</a>\n.*"(.*)">(.*)</a>\n.*>(.*)<'
+                colorSearchUrl = BASE + '/search/url/' + _url
+                colorSearch = await client.get(colorSearchUrl)
+                if colorSearch.status != 200:
+                    break
+                colorSearchResult = await colorSearch.text()
+                colorSearchResultSet = await _process(re.compile(pattern=pattern).findall(colorSearchResult))
+                searchResult['色合検索'].append(colorSearchResultSet)
+                bovwSearchUrl = re.compile(pattern=r'<span><a href="(.*)">特徴検索').findall(colorSearchResult)
+                bovwSearch = await client.get(BASE + bovwSearchUrl[0])
+                if bovwSearch.status != 200:
+                    break
+                bovwSearchResult = await bovwSearch.text()
+                bovwSearchResultSet = await _process(re.compile(pattern=pattern).findall(bovwSearchResult))
+                searchResult['特徴検索'].append(bovwSearchResultSet)
+            except RuntimeError:
+                pass
+        await client.close()
+        return searchResult

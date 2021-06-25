@@ -27,7 +27,7 @@ class ATRI:
     """
 
     def __init__(self):
-        with open('cfg.json', 'r') as cfg:
+        with open('cfg.json', 'r', encoding='utf-8') as cfg:
             self.cfg = json.load(cfg)
         self.loop = asyncio.get_event_loop()
         self.bcc = Broadcast(loop=self.loop)
@@ -42,11 +42,12 @@ class ATRI:
             )
         )
         self.qqai = self.cfg['qqai']['enable']
-        self.setu = self.cfg['setu']['enable']
-        self.sticker = self.cfg['sticker']['enable']
+        self.setu = self.cfg['setu']
+        self.sticker = self.cfg['sticker']
         self.onlyGroup = self.cfg['onlyGroup']
         self.shieldGroup = self.cfg['shieldGroup']
         self.shieldFriend = self.cfg['shieldFriend']
+        self.illustrationSearch = self.cfg['illustrationSearch']
 
         self.qqaiAppid = self.cfg['qqai']['appid'] if self.cfg['qqai']['enable'] else None
         self.qqaiKey = self.cfg['qqai']['appkey'] if self.cfg['qqai']['enable'] else None

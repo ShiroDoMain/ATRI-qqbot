@@ -37,6 +37,7 @@ class GroupEvent:
     bcc: Broadcast
     app: GraiaMiraiApplication
     setu = acgTools.SetuTime()
+    search = acgTools.acgSearch()
     with open('interaction.json', 'r') as c:
         conversation = json.load(c)
     conversation = conversation['conversation']
@@ -47,7 +48,6 @@ class GroupEvent:
     StickerPath = atri.sticker['path']
     onlyGroup = atri.onlyGroup['list'] if atri.onlyGroup['enable'] else False
     shieldGroup = atri.shieldGroup['list'] if atri.shieldGroup['enable'] else []
-
 
     @staticmethod
     def chainBuild(elements: list) -> MessageChain:
@@ -88,10 +88,8 @@ class GroupEvent:
                 chain = MessageChain.create(
                     [Image.fromLocalFile(GroupEvent.StickerPath + patten)]
                 )
-
         if GroupEvent.setu.enable and messagePlain in GroupEvent.setu.cmd:
             setu = GroupEvent.setu.randomSetu()
-            print(setu)
             chain = MessageChain.create(
                 [
                     Image.fromLocalFile(setu)
@@ -99,6 +97,24 @@ class GroupEvent:
                     Image.fromLocalFile(setu).asFlash()
                 ]
             )
+        if GroupEvent.search.enable and messagePlain == GroupEvent.search.cmd:
+            if not message.has(Image):
+                chain = MessageChain.create(
+                    [
+                        Plain('未能在消息中找到图片')
+                    ]
+                )
+            else:
+                urls = [image.url for image in message.get(Image)] if message.has(Image) else []
+                searchResultSet = await GroupEvent.search.ascii2d(urls)
+                chain = MessageChain.create(
+                    [
+                        Plain('特徴検索:\n%s%s色合検索:\n%s' % ('\n'.join(searchResultSet['特徴検索']),
+                                                        '='*20,
+                                                        '\n'.join(searchResultSet['色合検索'])))
+                    ]
+                )
+            GroupEvent.quote = True
 
         if chain:
             await atri.app.sendGroupMessage(group, chain, quote=message.get(Source)[0] if GroupEvent.quote else None)
