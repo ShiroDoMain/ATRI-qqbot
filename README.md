@@ -24,10 +24,6 @@ Hi！
 >>>  qq:int，指定拥有与群主和管理员相同能操作bot的权限的用户，有且只有一个  
 >>
 >>  blackList:int列表,bot不想理会的对象  
->>  qqai:  
->>>   enable:默认false，指定为true时可以使用与腾讯ai对接的appid和key进行情景对话  
->>>   appid:int，提供的id  
->>>   appkey:qqai提供的key  
 >>  
 >>  sticker:  
 >>>    enable:默认true，设置为true时bot可以触发回复指定的sticker  
@@ -82,3 +78,6 @@ Hi！
 
 # 鸣谢
 感谢 [GraiaProject](https://github.com/GraiaProject) 的 [graia](https://github.com/GraiaProject/Application) 和 [mamoe](https://github.com/mamoe) 的 [mirai](https://github.com/mamoe/mirai)项目给我们带来了快乐
+
+# Changelog  
+>  腾讯ai关闭了机器人示例，删除对应的接口
