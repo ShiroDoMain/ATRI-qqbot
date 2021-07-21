@@ -1,6 +1,6 @@
+graia-application-mirai
 moviepy
 requests
-qqai
 Pillow
 aiohttp
 saucenao_api
