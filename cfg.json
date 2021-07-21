@@ -20,12 +20,6 @@
   },
   "blackList": [],
 
-  "qqai": {
-    "enable": false,
-    "appid": null,
-    "appkey": ""
-  },
-
   "sticker": {
     "enable": true,
     "path": "storage/picture/sticker/"
