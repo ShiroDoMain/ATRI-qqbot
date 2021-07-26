@@ -7,7 +7,9 @@
     "host" : "",
     "ws": true
   },
-
+  "qqai": {
+    "enable": true
+  },
   "event": {
     "groupEvent": true,
     "friendEvent": true,
@@ -36,7 +38,15 @@
 
   "illustrationSearch": {
     "enable": true,
-    "command": ["以图搜图"]
+    "command": [
+      "以图搜图"
+    ]
+  },
+  "Akinator": {
+    "enable": true,
+    "command": [
+      "网络天才"
+    ]
   },
 
   "animeSearch": {
