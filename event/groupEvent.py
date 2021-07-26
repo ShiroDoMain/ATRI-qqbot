@@ -31,6 +31,7 @@ from graia.broadcast import Broadcast
 
 from engine import atri
 from model import sticker, acgTools
+from model.akinatorG import akinatorGame
 
 
 class GroupEvent:
@@ -47,6 +48,7 @@ class GroupEvent:
     quote = conversation['quote']
     Sticker = atri.sticker["enable"]
     StickerPath = atri.sticker['path']
+    Akinator = atri.Akinator["enable"]
 
     onlyGroup = atri.onlyGroup['list'] if atri.onlyGroup['enable'] else False
     shieldGroup = atri.shieldGroup['list'] if atri.shieldGroup['enable'] else []
@@ -70,6 +72,9 @@ class GroupEvent:
             return
         if group.id in GroupEvent.shieldGroup:
             return
+
+        if GroupEvent.Akinator:
+            await akinatorGame.process(messagePlain,group,member)
 
         if GroupEvent.conv:
             if not GroupEvent._at and messagePlain in GroupEvent.conversation['msg']:

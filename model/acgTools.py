@@ -155,3 +155,5 @@ class AnimeSearch:
                 result = cls._wget(url)
                 _count -= 1
         return result if result else 'Not Found'
+
+
