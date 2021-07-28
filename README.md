@@ -1,8 +1,8 @@
 # ATRI Project
 ## 使用注解
 Hi！  
-这是一个基于mirai框架，graia SDK的qqbot  
-您只需要在cfg.json文件里设置bot参数即可
+这是一个基于 [mirai](https://github.com/mamoe/mirai) 框架协议，[graia](https://github.com/GraiaProject/Application) SDK和 [mirai-api-http](https://github.com/project-mirai/mirai-api-http) 的qqbot  
+您需要在cfg.json文件里设置bot参数
 
 ## 配置
 >cfg.json:  
@@ -45,6 +45,10 @@ Hi！
 >>>   enable:默认true，指定为true时开启以图搜番
 >>>   command:str列表,指定触发命令
 >>   
+>>  Akinator:
+>>    enable:默认true,指定为true时开启网络天才
+>>    command:str列表,指定触发命令
+>>
 >>  shieldGroup:  
 >>>   enable:默认false，指定为true时Bot屏蔽指定群聊
 >>>   list:int列表，屏蔽指定群聊   
@@ -81,3 +85,4 @@ Hi！
 
 # Changelog  
 >  \[2021-07-22]:腾讯ai关闭了机器人示例，删除对应的接口
+>  \[2021-07-28]:合并来自[Siltal](https://github.com/Siltal)的pr

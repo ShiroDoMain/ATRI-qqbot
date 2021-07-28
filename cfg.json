@@ -40,16 +40,16 @@
       "以图搜图"
     ]
   },
+
+  "animeSearch": {
+    "enable": true,
+    "command": ["以图搜番"]
+  },
   "Akinator": {
     "enable": true,
     "command": [
       "网络天才"
     ]
-  },
-
-  "animeSearch": {
-    "enable": true,
-    "command": ["以图搜番"]
   },
 
   "shieldGroup": {
