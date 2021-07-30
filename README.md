@@ -84,6 +84,6 @@ Hi！
 感谢 [GraiaProject](https://github.com/GraiaProject) 的 [graia](https://github.com/GraiaProject/Application) 和 [mamoe](https://github.com/mamoe) 的 [mirai](https://github.com/mamoe/mirai)项目给我们带来了快乐
 
 # Changelog  
->  \[2021-07-22]:腾讯ai关闭了机器人示例，删除对应的接口
->  \[2021-07-28]:合并来自[Siltal](https://github.com/Siltal)的pr
->  \[2021-07-30]:添加了吃啥
+>  \[2021-07-22]:腾讯ai关闭了机器人示例，删除对应的接口  
+>  \[2021-07-28]:合并来自[Siltal](https://github.com/Siltal)的pr  
+>  \[2021-07-30]:添加了吃啥  
