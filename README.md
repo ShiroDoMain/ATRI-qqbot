@@ -78,7 +78,7 @@ Hi！
 ~~注意身体~~
 
 ## Note
-另一[开源项目](https://github.com/ShiroDoMain/TimeBot)，可自行搭配使用
+另一开源项目[TimeBot](https://github.com/ShiroDoMain/TimeBot)，可自行搭配使用
 
 # 鸣谢
 感谢 [GraiaProject](https://github.com/GraiaProject) 的 [graia](https://github.com/GraiaProject/Application) 和 [mamoe](https://github.com/mamoe) 的 [mirai](https://github.com/mamoe/mirai)项目给我们带来了快乐
