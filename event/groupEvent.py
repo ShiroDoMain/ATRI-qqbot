@@ -6,6 +6,7 @@
 # @Software: PyCharm
 """GroupMessage"""
 import json
+import random
 
 from graia.application.entry import (
     GraiaMiraiApplication,
@@ -137,9 +138,11 @@ class GroupEvent:
                         Plain(searchResultSet)
                     ]
                 )
+        if message.asDisplay() in ['吃啥', '恰啥', '吃什么', '今晚吃啥', '今晚吃什么', '等会吃什么', '等会吃啥', '来点吃的']:
+            chain = MessageChain.create([Image.fromLocalFile('img/sticker/food/%d.png' % random.randrange(13))])
 
         if chain:
-            await atri.app.sendGroupMessage(group, chain, quote=message.get(Source)[0] if GroupEvent.quote else None)
+            await atri.app.sendGroupMessage(group, chain, quote=message[Source][0] if GroupEvent.quote else None)
 
     @staticmethod
     @atri.bcc.receiver(__doc__)
