@@ -49,6 +49,14 @@ Hi！
 >>    enable:默认true,指定为true时开启网络天才
 >>    command:str列表,指定触发命令
 >>
+>>  chatBot:
+>>>   enable: 默认true,指定为true时开启对话机器人
+>>>   at:默认true,指定为true时被at触发对话
+>>>   nameRouse:默认true,指定为true时检测到对话中有bot名字触发对话机器人
+>>>   badRequest:请求异常时触发对话
+>>>   quote:默认false,指定true时回复相关对话
+>>>   shield:int数组,不在指定群组触发对话
+>>
 >>  shieldGroup:  
 >>>   enable:默认false，指定为true时Bot屏蔽指定群聊
 >>>   list:int列表，屏蔽指定群聊   
@@ -87,3 +95,4 @@ Hi！
 >  \[2021-07-22]:腾讯ai关闭了机器人示例，删除对应的接口  
 >  \[2021-07-28]:合并来自[Siltal](https://github.com/Siltal)的pr  
 >  \[2021-07-30]:添加了吃啥  
+>  \[2021-08-14]:添加对话机器人，修改依赖

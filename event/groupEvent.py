@@ -29,7 +29,7 @@ from graia.application.entry import (
 
 )
 from graia.broadcast import Broadcast
-
+from model.chatBot import ChatBot
 from engine import atri
 from model import sticker, acgTools
 from model.akinatorG import akinatorGame
@@ -38,6 +38,7 @@ from model.akinatorG import akinatorGame
 class GroupEvent:
     bcc: Broadcast
     app: GraiaMiraiApplication
+    chat : ChatBot
     setu = acgTools.SetuTime()
     acgSearch = acgTools.AcgSearch()
     animeSearch = acgTools.AnimeSearch()
@@ -46,10 +47,13 @@ class GroupEvent:
     conversation = conversation['conversation']
     conv = conversation['enable']
     _at = conversation['at']
-    quote = conversation['quote']
+
     Sticker = atri.sticker["enable"]
     StickerPath = atri.sticker['path']
     Akinator = atri.Akinator["enable"]
+    chatBot = atri.chatBot['enable']
+
+    quote = any([conversation['quote'], chatBot['quote']])
 
     onlyGroup = atri.onlyGroup['list'] if atri.onlyGroup['enable'] else False
     shieldGroup = atri.shieldGroup['list'] if atri.shieldGroup['enable'] else []
@@ -64,7 +68,7 @@ class GroupEvent:
     async def messageEvent(message: MessageChain, member: Member, group: Group):
         """群组消息事件"""
         chain = None
-        messagePlain = message.get(Plain)[0].text.strip() if message.has(Plain) else None
+        messagePlain = ''.join([msg.text.strip() for msg in message[Plain]]) if message.has(Plain) else None
         atMember = [a.target for a in message.get(At)] if message.has(At) else []
 
         if member.id in atri.loadBlackList():
@@ -73,6 +77,20 @@ class GroupEvent:
             return
         if group.id in GroupEvent.shieldGroup:
             return
+
+        if GroupEvent.chatBot:
+            if all([message.has(At), atri.qq in [mb.target for mb in message[At]],group.id not in atri.chatBot['shield']]):
+                response = await GroupEvent.chat.chat(messagePlain)
+                if response['status'] == 'success':
+                    chain = GroupEvent.chainBuild([Plain(response['msg'])])
+                else:
+                    chain = GroupEvent.chainBuild([Plain(atri.chatBot['badRequest'])])
+            elif all([atri.name in messagePlain.lower(), group.id not in atri.chatBot['shield']]):
+                response = await GroupEvent.chat.chat(messagePlain)
+                if response['status'] == 'success':
+                    chain = GroupEvent.chainBuild([Plain(response['msg'])])
+                else:
+                    chain = GroupEvent.chainBuild([Plain(atri.chatBot['badRequest'])])
 
         if GroupEvent.Akinator:
             await akinatorGame.process(messagePlain,group,member)
@@ -113,7 +131,7 @@ class GroupEvent:
                     ]
                 )
             else:
-                urls = [image.url for image in message.get(Image)] if message.has(Image) else []
+                urls = [image.url for image in message[Image]] if message.has(Image) else []
                 searchResultSet = await GroupEvent.acgSearch.ascii2d(urls)
                 chain = MessageChain.create(
                     [
@@ -131,7 +149,7 @@ class GroupEvent:
                     ]
                 )
             else:
-                url = message.get(Image)[0].url
+                url = message[Image][0].url
                 searchResultSet = await GroupEvent.animeSearch.animeSearch(url)
                 chain = MessageChain.create(
                     [

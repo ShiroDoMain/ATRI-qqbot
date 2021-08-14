@@ -1,7 +1,6 @@
 {
   "botConfig":{
     "botName": "ATRI",
-    "nameRouse": true,
     "qq" :  ,
     "authKey": "",
     "host" : "",
@@ -50,6 +49,14 @@
     "command": [
       "网络天才"
     ]
+  },
+  "chatBot":{
+    "enable": true,
+    "at": true,
+    "nameRouse": true,
+    "badRequest": "不知道怎么回答",
+    "quote": false,
+    "shield": []
   },
 
   "shieldGroup": {

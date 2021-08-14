@@ -32,6 +32,7 @@ class ATRI:
         self.loop = asyncio.get_event_loop()
         self.bcc = Broadcast(loop=self.loop)
         self.qq = self.cfg['botConfig']['qq']
+        self.name = self.cfg['botConfig']['botName']
         self.app = GraiaMiraiApplication(
             broadcast=self.bcc,
             connect_info=Session(
@@ -50,6 +51,7 @@ class ATRI:
         self.illustrationSearch = self.cfg['illustrationSearch']
         self.animeSearch = self.cfg['animeSearch']
         self.Akinator = self.cfg['Akinator']
+        self.chatBot = self.cfg['chatBot']
 
         self.setuPath = self.cfg['setu']['path'] if self.cfg['setu']['enable'] else None
         self.stickerPath = self.cfg['sticker']['path'] if self.cfg['sticker']['enable'] else None

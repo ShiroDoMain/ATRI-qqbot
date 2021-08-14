@@ -1,7 +1,7 @@
-graia-application-mirai
+graia-application-mirai==0.16.1
 moviepy
 requests
-Pillow
+pillow
 aiohttp
 saucenao_api
 numpy
