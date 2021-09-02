@@ -38,7 +38,7 @@ from model.akinatorG import akinatorGame
 class GroupEvent:
     bcc: Broadcast
     app: GraiaMiraiApplication
-    chat : ChatBot
+    chat = ChatBot()
     setu = acgTools.SetuTime()
     acgSearch = acgTools.AcgSearch()
     animeSearch = acgTools.AnimeSearch()
