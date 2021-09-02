@@ -2,7 +2,10 @@
 ## 使用注解
 Hi！  
 这是一个基于 [mirai](https://github.com/mamoe/mirai) 框架协议，[graia](https://github.com/GraiaProject/Application) SDK和 [mirai-api-http](https://github.com/project-mirai/mirai-api-http) 的qqbot  
-您需要在cfg.json文件里设置bot参数
+您需要在cfg.json文件里设置bot参数,然后  
+```shell script
+python3 ATRI.py
+```
 
 ## 配置
 >cfg.json:  
