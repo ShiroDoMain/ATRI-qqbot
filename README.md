@@ -1,4 +1,7 @@
 # ATRI Project
+![Mirai-HTTP-API-Version](https://img.shields.io/badge/Mirai--HTTP--API-1.12.0-brightgreen.svg?style=plastic)
+![Graia-application-mirai-Version](https://img.shields.io/badge/Graia--application--mirai-0.18.4-brightgreen.svg?style=plastic)
+![Graia-broadcast-Version](https://img.shields.io/badge/Graia--broadcast-0.7.0-brightgreen.svg?style=plastic)
 ## 使用注解
 Hi！  
 这是一个基于 [mirai](https://github.com/mamoe/mirai) 框架协议，[graia](https://github.com/GraiaProject/Application) SDK和 [mirai-api-http](https://github.com/project-mirai/mirai-api-http) 的qqbot  
