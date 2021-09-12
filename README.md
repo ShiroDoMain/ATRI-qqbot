@@ -1,5 +1,7 @@
 # ATRI Project
-![Mirai-HTTP-API-Version](https://img.shields.io/badge/Mirai--HTTP--API-1.12.0-brightgreen.svg?style=plastic)
+![Mirai-console-Version](https://img.shields.io/badge/mirai--console-2.7.1--dev-brightgreen.svg?style=plastic)
+![Mirai-HTTP-API-Version](https://img.shields.io/badge/mirai--http--api-1.12.0-brightgreen.svg?style=plastic)
+![Graia-broadcast-Version](https://img.shields.io/badge/Graia--broadcast-0.7.0-brightgreen.svg?style=plastic)
 ![Graia-application-mirai-Version](https://img.shields.io/badge/Graia--application--mirai-0.18.4-brightgreen.svg?style=plastic)
 ![Graia-broadcast-Version](https://img.shields.io/badge/Graia--broadcast-0.7.0-brightgreen.svg?style=plastic)
 ## 使用注解
