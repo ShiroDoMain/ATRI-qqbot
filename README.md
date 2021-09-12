@@ -8,7 +8,10 @@ python3 ATRI.py
 ```
 
 ## 配置
->cfg.json:  
+<details>
+<summary>cfg.json</summary>
+
+> cfg.json:  
 >>  botConfig:  
 >>>  botName:bot的名称
 >>>  nameRouse:默认true，设置为true时可以通过设定的botName交互  
@@ -71,7 +74,7 @@ python3 ATRI.py
 >>  shieldFriend:
 >>>   enable:默认false，指定为true时Bot不会监听指定好友消息  
 >>>   list:int列表，屏蔽指定好友
-
+</details>
 
 ## 功能
 目前实现的功能有  
