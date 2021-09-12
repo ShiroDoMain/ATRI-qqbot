@@ -1,4 +1,4 @@
-graia-application-mirai==0.16.1
+graia-application-mirai==0.18.4
 moviepy
 requests
 pillow
