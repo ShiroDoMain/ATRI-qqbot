@@ -97,14 +97,17 @@ python3 ATRI.py
 ~~注意身体~~
 
 ## Note
-另一开源项目[TimeBot](https://github.com/ShiroDoMain/TimeBot)，可自行搭配使用  
+另一开源项目[TimeBot](https://github.com/ShiroDoMain/TimeBot) ，可自行搭配使用 
 
-# 鸣谢
-感谢 [GraiaProject](https://github.com/GraiaProject) 的 [graia](https://github.com/GraiaProject/Application) 和 [mamoe](https://github.com/mamoe) 的 [mirai](https://github.com/mamoe/mirai)项目给我们带来了快乐
+## 开源  
+本项目使用[GNU AGPLv3](https://github.com/ShiroDoMain/ATRI-qqbot/blob/master/LICENSE) 协议作为开源许可证  
 
-# Changelog  
+## 鸣谢
+感谢 [GraiaProject](https://github.com/GraiaProject) 的 [graia](https://github.com/GraiaProject/Application) 和 [mamoe](https://github.com/mamoe) 的 [mirai](https://github.com/mamoe/mirai) 项目给我们带来了快乐
+
+## Changelog  
 >  \[2021-07-22]:腾讯ai关闭了机器人示例，删除对应的接口  
->  \[2021-07-28]:合并来自[Siltal](https://github.com/Siltal)的pr  
+>  \[2021-07-28]:合并来自 [Siltal](https://github.com/Siltal) 的pr  
 >  \[2021-07-30]:添加了吃啥  
 >  \[2021-08-14]:添加对话机器人，修改依赖  
 >  \[2021-09-12]:Mirai修复图片发送,更新依赖  
