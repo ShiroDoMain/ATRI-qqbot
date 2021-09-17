@@ -58,6 +58,7 @@
     "quote": false,
     "shield": []
   },
+  "weather": true,
 
   "shieldGroup": {
     "enable": false,

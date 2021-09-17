@@ -67,6 +67,8 @@ python3 ATRI.py
 >>>   badRequest:请求异常时触发对话  
 >>>   quote:默认false,指定true时回复相关对话  
 >>>   shield:int数组,不在指定群组触发对话  
+>>
+>>  weather:默认true,指定为true时可以使用天气功能
 >>  
 >>  shieldGroup:  
 >>>   enable:默认false，指定为true时Bot屏蔽指定群聊

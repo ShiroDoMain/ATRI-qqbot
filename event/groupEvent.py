@@ -7,6 +7,7 @@
 """GroupMessage"""
 import json
 import random
+import re
 
 from graia.application.entry import (
     GraiaMiraiApplication,
@@ -33,6 +34,7 @@ from model.chatBot import ChatBot
 from engine import atri
 from model import sticker, acgTools
 from model.akinatorG import akinatorGame
+from model.weather import weather
 
 
 class GroupEvent:
@@ -156,6 +158,15 @@ class GroupEvent:
                         Plain(searchResultSet)
                     ]
                 )
+
+        if atri.weather:
+            if message.asDisplay().endswith(r"天气") and message.asDisplay()[0:3] != atri.name:
+                city = re.findall(r'(\S{1,5}[^市省]).?天气', message.asDisplay().strip())
+                if city:
+                    fn = await weather(city[0])
+                    if fn:
+                        chain = MessageChain.create([Image.fromLocalFile(fn)])
+
         if message.asDisplay() in ['吃啥', '恰啥', '吃什么', '今晚吃啥', '今晚吃什么', '等会吃什么', '等会吃啥', '来点吃的']:
             chain = MessageChain.create([Image.fromLocalFile('img/sticker/food/%d.png' % random.randrange(13))])
 
