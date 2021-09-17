@@ -68,7 +68,7 @@ python3 ATRI.py
 >>>   quote:默认false,指定true时回复相关对话  
 >>>   shield:int数组,不在指定群组触发对话  
 >>
->>  weather:默认true,指定为true时可以使用天气功能
+>>  weather:默认true,指定为true时可以使用天气功能  
 >>  
 >>  shieldGroup:  
 >>>   enable:默认false，指定为true时Bot屏蔽指定群聊
@@ -113,3 +113,4 @@ python3 ATRI.py
 >  \[2021-07-30]:添加了吃啥  
 >  \[2021-08-14]:添加对话机器人，修改依赖  
 >  \[2021-09-12]:Mirai修复图片发送,更新依赖  
+>  \[2021-09-12]:新增天气接口  
