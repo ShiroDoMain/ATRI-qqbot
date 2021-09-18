@@ -160,10 +160,15 @@ class GroupEvent:
                 )
 
         if atri.weather:
-            if message.asDisplay().endswith(r"天气") and message.asDisplay()[0:3] != atri.name:
-                city = re.findall(r'(\S{1,5}[^市省]).?天气', message.asDisplay().strip())
+            if message.asDisplay().endswith(r"天气"):
+                if '今日' in message.asDisplay().strip() or '今天' in message.asDisplay().strip():
+                    city = re.findall(r'(\S{1,5}[^市省]).?今[日天]?天气', message.asDisplay().strip())
+                    model = 'day'
+                else:
+                    city = re.findall(r'(\S{1,5}[^市省]).?天气', message.asDisplay().strip())
+                    model = ''
                 if city:
-                    fn = await weather(city[0])
+                    fn = await weather(city[0], model)
                     if fn:
                         chain = MessageChain.create([Image.fromLocalFile(fn)])
 
