@@ -1,5 +1,7 @@
 import aiohttp
 from matplotlib import pyplot as plt
+from pylab import mpl
+mpl.rcParams['font.sans-serif'] = ['SimHei']
 
 
 async def weather(city,model='day'):
