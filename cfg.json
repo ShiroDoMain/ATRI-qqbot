@@ -1,7 +1,7 @@
 {
   "botConfig":{
-    "botName": "ATRI",
-    "qq" :  ,
+    "botName": "",
+    "qq" : 123456 ,
     "authKey": "",
     "host" : "",
     "ws": true
@@ -45,7 +45,7 @@
     "command": ["以图搜番"]
   },
   "Akinator": {
-    "enable": true,
+    "enable": false,
     "command": [
       "网络天才"
     ]

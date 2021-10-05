@@ -33,7 +33,7 @@ from graia.broadcast import Broadcast
 from model.chatBot import ChatBot
 from engine import atri
 from model import sticker, acgTools
-from model.akinatorG import akinatorGame
+# from model.akinatorG import akinatorGame
 from model.weather import weather
 
 
@@ -55,7 +55,7 @@ class GroupEvent:
     Akinator = atri.Akinator["enable"]
     chatBot = atri.chatBot['enable']
 
-    quote = any([conversation['quote'], chatBot['quote']])
+    quote = any([conversation['quote'], atri.chatBot['quote']])
 
     onlyGroup = atri.onlyGroup['list'] if atri.onlyGroup['enable'] else False
     shieldGroup = atri.shieldGroup['list'] if atri.shieldGroup['enable'] else []
@@ -84,7 +84,7 @@ class GroupEvent:
             if all([message.has(At), atri.qq in [mb.target for mb in message[At]],group.id not in atri.chatBot['shield']]):
                 response = await GroupEvent.chat.chat(messagePlain)
                 if response['status'] == 'success':
-                    chain = GroupEvent.chainBuild([Plain(response['msg'])])
+                    chain = GroupEvent.chainBuild([Plain(response['message'])])
                 else:
                     chain = GroupEvent.chainBuild([Plain(atri.chatBot['badRequest'])])
             elif all([atri.name in messagePlain.lower(), group.id not in atri.chatBot['shield']]):
@@ -94,8 +94,8 @@ class GroupEvent:
                 else:
                     chain = GroupEvent.chainBuild([Plain(atri.chatBot['badRequest'])])
 
-        if GroupEvent.Akinator:
-            await akinatorGame.process(messagePlain,group,member)
+        # if GroupEvent.Akinator:
+        #     await akinatorGame.process(messagePlain,group,member)
 
         if GroupEvent.conv:
             if not GroupEvent._at and messagePlain in GroupEvent.conversation['msg']:

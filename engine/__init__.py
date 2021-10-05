@@ -42,7 +42,7 @@ class ATRI:
                 websocket=True
             )
         )
-        self.qqai = self.cfg['qqai']['enable']
+
         self.setu = self.cfg['setu']
         self.sticker = self.cfg['sticker']
         self.onlyGroup = self.cfg['onlyGroup']
