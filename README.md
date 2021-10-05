@@ -18,12 +18,12 @@ python3 ATRI.py
 
 > cfg.json:  
 >>  botConfig:  
->>>  botName:bot的名称
->>>  nameRouse:默认true，设置为true时可以通过设定的botName交互  
->>>  qq:Bot的qq  
->>>  authKey:Bot的authKey  
->>>   host:Bot的地址  
+>>>  botName: 必填,bot的名称  
+>>>  qq: 必填,Bot的qq    
+>>>  authKey:必填.Bot的authKey    
+>>>   host:必填,Bot的地址    
 >>>   ws:默认true，以websocket方式监听  
+>>>  nameRouse:默认true，设置为true时可以通过设定的botName交互  
 >>  
 >>  event:  
 >>>   groupEvent:默认true，设置为true时监听群组消息  
