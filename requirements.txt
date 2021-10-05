@@ -3,6 +3,5 @@ moviepy
 requests
 pillow
 aiohttp
-akinator
 saucenao_api
 numpy
