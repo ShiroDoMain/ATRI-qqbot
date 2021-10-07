@@ -70,7 +70,7 @@ class GroupEvent:
     async def messageEvent(message: MessageChain, member: Member, group: Group):
         """群组消息事件"""
         chain = None
-        messagePlain = ''.join([msg.text.strip() for msg in message[Plain]]) if message.has(Plain) else None
+        messagePlain = ''.join([msg.text.strip() for msg in message[Plain]]) if message.has(Plain) else ''
         atMember = [a.target for a in message.get(At)] if message.has(At) else []
 
         if member.id in atri.loadBlackList():
@@ -90,7 +90,7 @@ class GroupEvent:
             elif all([atri.name in messagePlain.lower(), group.id not in atri.chatBot['shield']]):
                 response = await GroupEvent.chat.chat(messagePlain)
                 if response['status'] == 'success':
-                    chain = GroupEvent.chainBuild([Plain(response['msg'])])
+                    chain = GroupEvent.chainBuild([Plain(response['message'])])
                 else:
                     chain = GroupEvent.chainBuild([Plain(atri.chatBot['badRequest'])])
 
