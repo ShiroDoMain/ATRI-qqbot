@@ -44,12 +44,6 @@
     "enable": true,
     "command": ["以图搜番"]
   },
-  "Akinator": {
-    "enable": false,
-    "command": [
-      "网络天才"
-    ]
-  },
   "chatBot":{
     "enable": true,
     "at": true,

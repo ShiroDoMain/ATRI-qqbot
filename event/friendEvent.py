@@ -10,8 +10,11 @@ from graia.application.entry import (
     Friend,
     GraiaMiraiApplication,
     MessageChain,
-    NewFriendRequestEvent)
+    NewFriendRequestEvent,
+    Plain
+)
 from graia.broadcast import Broadcast
+from model.chatBot import ChatBot
 
 
 class FriendEvent:
@@ -21,7 +24,17 @@ class FriendEvent:
     @staticmethod
     @atri.bcc.receiver(__doc__)
     async def messageEvent(friend: Friend, message: MessageChain):
-        """好友消息事件"""
+        _msg_text = "".join([msg.text.strip() for msg in message[Plain]]) if message.has(Plain) else ''
+        if message.has(Plain):
+            _chat_response = await ChatBot.chat(_msg_text)
+            _chain = MessageChain.create(
+                [
+                    Plain(_chat_response["message"] if _chat_response['status'] == 'success' else atri.chatBot['badRequest'])
+                ]
+            )
+
+        if _chain:
+            await atri.app.sendFriendMessage(friend, _chain)
 
     @staticmethod
     @atri.bcc.receiver(NewFriendRequestEvent.type)

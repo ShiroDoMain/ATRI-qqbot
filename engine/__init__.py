@@ -50,7 +50,6 @@ class ATRI:
         self.shieldFriend = self.cfg['shieldFriend']
         self.illustrationSearch = self.cfg['illustrationSearch']
         self.animeSearch = self.cfg['animeSearch']
-        self.Akinator = self.cfg['Akinator']
         self.chatBot = self.cfg['chatBot']
         self.weather = self.cfg['weather']
 

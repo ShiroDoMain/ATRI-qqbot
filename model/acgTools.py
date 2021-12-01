@@ -4,12 +4,13 @@
 # @File    : acgTools.py
 # @Software: PyCharm
 import asyncio
-import os, random
+import os
+import random
 import re
 from typing import Union
 
-from aiohttp import ClientSession
 import aiohttp
+from aiohttp import ClientSession
 from typing.io import IO
 
 from engine import atri
@@ -75,8 +76,9 @@ class AcgSearch:
     ):
         """
         ascii2d的以图搜图
-        :param url: 列表或者单个图片链接
+        :param urls: 列表或者单个图片链接
         :param file: 列表或者单个图片文件
+        :param _loop:
         :return:
         """
         BASE = 'http://ascii2d.nekomimi.icu'
@@ -128,24 +130,21 @@ class AnimeSearch:
     @classmethod
     async def _wget(cls, url):
         async with aiohttp.ClientSession() as client:
-            try:
-                response = await client.get(cls.BASE + '/api/search?url=' + url)
-                data = await response.json()
-                if response.status != 200:
-                    return False
-                data = data['docs'][0]
-                date = data['from']
-                _m = (date-(3600*(date*3600)))//60
-                _s = date%60
-                date = '%d:%s:%d'%(date%3600,_m if _m >= 10 else f'0{_m}',_s if _s >= 10 else f'0{_s}')
-                return '匹配番剧:%s\n匹配相似度:%.2f%s\n匹配位置:%s' % (
-                    data['title'],
-                    data['similarity'] * 10,
-                    '%',
-                    date
-                )
-            except not KeyboardInterrupt:
+            response = await client.get(cls.BASE + '/api/search?url=' + url)
+            data = await response.json()
+            if response.status != 200:
                 return False
+            data = data['docs'][0]
+            date = data['from']
+            _m = (date-(3600*(date*3600)))//60
+            _s = date%60
+            date = '%d:%s:%d'%(date%3600,_m if _m >= 10 else f'0{_m}',_s if _s >= 10 else f'0{_s}')
+            return '匹配番剧:%s\n匹配相似度:%.2f%s\n匹配位置:%s' % (
+                data['title'],
+                data['similarity'] * 10,
+                '%',
+                date
+            )
 
     @classmethod
     async def animeSearch(cls, url, _count=3):
