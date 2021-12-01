@@ -55,11 +55,7 @@ python3 ATRI.py
 >>  animeSearch:  
 >>>   enable:默认true，指定为true时开启以图搜番
 >>>   command:str列表,指定触发命令
->>   
->>  Akinator:
->>    enable:默认true,指定为true时开启网络天才
->>    command:str列表,指定触发命令
->>
+>>  
 >>  chatBot:  
 >>>   enable: 默认true,指定为true时开启对话机器人  
 >>>   at:默认true,指定为true时被at触发对话  
@@ -117,3 +113,4 @@ python3 ATRI.py
 >  \[2021-09-18]:新增每日天气接口  
 >  \[2021-10-05]:修改对话机器人接口,添加注意力机制  
 >  \[2021-10-05]:去除网络天才功能，发布了一个可使用版本  
+>  \[2021-12-01]:添加好友消息事件  
