@@ -42,4 +42,4 @@ class Core:
         groupEvent.GroupEvent()
         friendEvent.FriendEvent()
         tempEvent.TempEvent()
-        atri.bot.run_forever()
+        atri.bot.run_forever() 
