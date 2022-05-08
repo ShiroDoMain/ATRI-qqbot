@@ -17,7 +17,7 @@ from event import (
     tempEvent
 )
 
-"""ATRI的事件处理模块"""
+"""ATRI的事件处理模块""" 
 
 
 @atri.bcc.receiver(BotOnlineEvent.type)
