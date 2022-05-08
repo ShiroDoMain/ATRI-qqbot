@@ -14,11 +14,7 @@ from typing import (
     Match
 )
 
-from graia.application.entry import (
-    GraiaMiraiApplication,
-    Session,
-)
-from graia.broadcast import Broadcast
+from karas.box import (Yurine)
 
 
 class ATRI:
@@ -30,18 +26,20 @@ class ATRI:
         with open('cfg.json', 'r', encoding='utf-8') as cfg:
             self.cfg = json.load(cfg)
         self.loop = asyncio.get_event_loop()
-        self.bcc = Broadcast(loop=self.loop)
         self.qq = self.cfg['botConfig']['qq']
-        self.name = self.cfg['botConfig']['botName']
-        self.app = GraiaMiraiApplication(
-            broadcast=self.bcc,
-            connect_info=Session(
-                host=self.cfg['botConfig']['host'],
-                authKey=self.cfg['botConfig']['authKey'],
-                account=self.qq,
-                websocket=True
-            )
+        name = self.cfg['botConfig']['botName']
+        self.botConfig = self.cfg.get("botConfig")
+        self.bot = Yurine(
+            host=self.botConfig.get("host"),
+            port=self.botConfig.get("port"),
+            qq=self.qq,
+            verifyKey=self.botConfig.get("verifyKey"),
+            loop=self.loop,
+            loggerLevel=self.botConfig.get("logLevel"),
+            logToFile=self.botConfig.get("logToFile").get("enable"),
+            logFileName=self.botConfig.get("logToFile").get("file") if self.botConfig.get("logToFile").get("enable") else None
         )
+        self.name = name if name != "" else self.bot.fetchBotProfile().nickname
 
         self.setu = self.cfg['setu']
         self.sticker = self.cfg['sticker']
@@ -86,15 +84,3 @@ from event import (
     groupEvent,
     tempEvent
 )
-
-
-class Core:
-    @staticmethod
-    def run():
-        ge: groupEvent.GroupEvent()
-        fe: friendEvent.FriendEvent()
-        te: tempEvent.TempEvent()
-        try:
-            atri.app.launch_blocking()
-        except KeyboardInterrupt:
-            atri.app.logger.info("exit")

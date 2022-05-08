@@ -11,7 +11,6 @@ from typing import Union
 
 import aiohttp
 from aiohttp import ClientSession
-from typing.io import IO
 
 from engine import atri
 
@@ -71,7 +70,7 @@ class AcgSearch:
     async def ascii2d(
             cls,
             urls: Union[list, str] = None,
-            file: IO = None,
+            file: bytes = None,
             _loop=None
     ):
         """

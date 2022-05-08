@@ -1,12 +1,11 @@
 # ATRI Project
-![Mirai-console-Version](https://img.shields.io/badge/mirai--console-2.7.1--dev-brightgreen.svg?style=plastic)
-![Mirai-HTTP-API-Version](https://img.shields.io/badge/mirai--http--api-1.12.0-brightgreen.svg?style=plastic)
-![Graia-broadcast-Version](https://img.shields.io/badge/Graia--broadcast-0.7.0-brightgreen.svg?style=plastic)
-![Graia-application-mirai-Version](https://img.shields.io/badge/Graia--application--mirai-0.18.4-brightgreen.svg?style=plastic)
-![Graia-broadcast-Version](https://img.shields.io/badge/Graia--broadcast-0.7.0-brightgreen.svg?style=plastic)
-## 使用注解
+![Mirai-console-Version](https://img.shields.io/badge/mirai--console-2.7.1--dev-brightgreen.svg?style=plastic)  
+![Mirai-HTTP-API-Version](https://img.shields.io/badge/mirai--http--api-2.5.0-brightgreen.svg?style=plastic)  
+![Karas-Version](https://img.shields.io/badge/Karas-0.1.4-brightgreen.svg?style=plastic)  
+
+## 使用注解  
 Hi！  
-这是一个基于 [mirai](https://github.com/mamoe/mirai) 框架协议，[graia](https://github.com/GraiaProject/Application) SDK和 [mirai-api-http](https://github.com/project-mirai/mirai-api-http) 的qqbot  
+这是一个基于 [mirai](https://github.com/mamoe/mirai) 框架协议，[karas](https://github.com/ShiroDoMain/karas) SDK和 [mirai-api-http](https://github.com/project-mirai/mirai-api-http) 的qqbot  
 您需要在cfg.json文件里设置bot参数,然后  
 ```shell script
 python3 ATRI.py
@@ -20,9 +19,14 @@ python3 ATRI.py
 >>  botConfig:  
 >>>  botName: 必填,bot的名称  
 >>>  qq: 必填,Bot的qq    
->>>  authKey:必填.Bot的authKey    
->>>   host:必填,Bot的地址    
->>>   ws:默认true，以websocket方式监听  
+>>>  verifyKey:必填.Bot的authKey    
+>>>  host:必填,mah的地址  
+>>>  port:必填,mah的端口  
+>>>  ws:默认true，以websocket方式监听  
+>>>  logLevel:日志输出登记。默认info  
+>>>  logToFile:  
+>>>>   enable:是否输出到文件，默认否  
+>>>>   file:日志输出文件，默认为logs/xxxxx.log  
 >>>  nameRouse:默认true，设置为true时可以通过设定的botName交互  
 >>  
 >>  event:  
@@ -114,3 +118,4 @@ python3 ATRI.py
 >  \[2021-10-05]:修改对话机器人接口,添加注意力机制  
 >  \[2021-10-05]:去除网络天才功能，发布了一个可使用版本  
 >  \[2021-12-01]:添加好友消息事件  
+>  \[2022-05-08]:更换了[karas](https://github.com/ShiroDoMain/karas) 框架  

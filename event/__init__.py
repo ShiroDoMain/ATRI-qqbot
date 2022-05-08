@@ -4,7 +4,7 @@
 # @Site    : 
 # @File    : __init__.py.py
 # @Software: PyCharm
-from graia.application.entry import (
+from karas.box import (
     BotOnlineEvent,
     BotOfflineEventDropped,
     BotOfflineEventForce
@@ -20,28 +20,26 @@ from event import (
 """ATRI的事件处理模块"""
 
 
-@atri.bcc.receiver(BotOnlineEvent.type)
+@atri.bot.listen(BotOnlineEvent.type)
 async def onlineEvent():
-    atri.app.logger.info("Bot登陆成功")
+    atri.bot.logging.info("Bot登陆成功")
 
 
-@atri.bcc.receiver(BotOfflineEventForce.type)
+@atri.bot.listen(BotOfflineEventForce.type)
 async def offlineEvent():
-    atri.app.logger.error('Bot被迫离线')
+    atri.bot.logging.error('Bot被迫离线')
 
 
-@atri.bcc.receiver(BotOfflineEventDropped.type)
+@atri.bot.listen(BotOfflineEventDropped.type)
 async def offlineDropEvent():
-    atri.app.logger.error('Bot与服务器断开连接')
+    atri.bot.logging.error('Bot与服务器断开连接')
+
 
 
 class Core:
     @staticmethod
     def run():
-        ge: groupEvent.GroupEvent()
-        fe: friendEvent.FriendEvent()
-        te: tempEvent.TempEvent()
-        try:
-            atri.app.launch_blocking()
-        except KeyboardInterrupt:
-            atri.app.logger.info("exit")
+        groupEvent.GroupEvent()
+        friendEvent.FriendEvent()
+        tempEvent.TempEvent()
+        atri.bot.run_forever()

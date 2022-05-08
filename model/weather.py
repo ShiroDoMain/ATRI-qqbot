@@ -1,3 +1,4 @@
+import os
 import aiohttp
 from matplotlib import pyplot as plt
 from pylab import mpl
@@ -14,6 +15,8 @@ async def weather(city,model='day'):
         if data['status'] != 'success':
             return False
         data =data['data']
+        if not os.path.exists("temp"):
+            os.mkdir("temp")
         if not model:
             day = data['state']
             maxTem = data['max']

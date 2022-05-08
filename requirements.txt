@@ -1,7 +1,8 @@
-graia-application-mirai==0.18.4
+karas_py == 0.1.4
 moviepy
 requests
 pillow
 aiohttp
 saucenao_api
 numpy
+matlibplot
