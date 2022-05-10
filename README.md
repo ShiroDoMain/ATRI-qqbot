@@ -6,7 +6,16 @@
 ## 使用注解  
 Hi！  
 这是一个基于 [mirai](https://github.com/mamoe/mirai) 框架协议，[karas](https://github.com/ShiroDoMain/karas) SDK和 [mirai-api-http](https://github.com/project-mirai/mirai-api-http) 的qqbot  
-您需要在cfg.json文件里设置bot参数,然后  
+PS: 使用本项目的前提您需要先启用一个mirai后端([mcl项目地址](https://github.com/iTXTech/mirai-console-loader))和[mah插件](https://github.com/project-mirai/mirai-api-http)  
+准备完成后使用使用git拉取本项目  
+```shell script
+git clone https://github.com/ShiroDoMain/ATRI-qqbot
+```
+您需要在cfg.json文件里设置bot参数,安装bot所需要的依赖  
+```shell script
+pip3 install -r requirements.txt
+```  
+然后运行文件  
 ```shell script
 python3 ATRI.py
 ```
@@ -99,13 +108,14 @@ python3 ATRI.py
 ~~注意身体~~
 
 ## Note
+该项目使用[karas](https://github.com/ShiroDoMain/karas)sdk开发  
 另一开源项目[TimeBot](https://github.com/ShiroDoMain/TimeBot) ，可自行搭配使用 
 
 ## 开源  
 本项目使用[GNU AGPLv3](https://github.com/ShiroDoMain/ATRI-qqbot/blob/master/LICENSE) 协议作为开源许可证  
 
 ## 鸣谢
-感谢 [GraiaProject](https://github.com/GraiaProject) 的 [graia](https://github.com/GraiaProject/Application) 和 [mamoe](https://github.com/mamoe) 的 [mirai](https://github.com/mamoe/mirai) 项目给我们带来了快乐
+感谢 [mamoe](https://github.com/mamoe) 的 [mirai](https://github.com/mamoe/mirai) 项目给我们带来了快乐
 
 ## Changelog  
 >  \[2021-07-22]:腾讯ai关闭了机器人示例，删除对应的接口  
