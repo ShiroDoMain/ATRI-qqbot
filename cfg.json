@@ -1,9 +1,15 @@
 {
   "botConfig":{
     "botName": "",
-    "qq" : 123456 ,
-    "authKey": "",
+    "qq" :  ,
+    "verifyKey": "",
     "host" : "",
+    "port": ,
+    "logLevel":"info",
+    "logToFile":{
+      "enable":true,
+      "file":""
+    },
     "ws": true
   },
   
