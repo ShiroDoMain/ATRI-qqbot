@@ -22,7 +22,7 @@ python3 ATRI.py
 
 ## 配置
 <details>
-<summary>cfg.json</summary>
+<summary>cfg.json</summary>  
 
 > cfg.json:  
 >>  botConfig:  
