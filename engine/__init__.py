@@ -16,6 +16,8 @@ from typing import (
 
 from karas.box import (Yurine)
 
+from model.Markov import Markov
+
 
 class ATRI:
     """
@@ -50,6 +52,8 @@ class ATRI:
         self.animeSearch = self.cfg['animeSearch']
         self.chatBot = self.cfg['chatBot']
         self.weather = self.cfg['weather']
+
+        self.markov = Markov("storage/markov.json")
 
         self.setuPath = self.cfg['setu']['path'] if self.cfg['setu']['enable'] else None
         self.stickerPath = self.cfg['sticker']['path'] if self.cfg['sticker']['enable'] else None

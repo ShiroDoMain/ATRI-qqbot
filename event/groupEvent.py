@@ -8,6 +8,7 @@
 import json
 import random
 import re
+from typing import Tuple
 from karas.box import (
     Yurine,
     MessageChain,
@@ -32,9 +33,16 @@ from karas.event import MemberUnmuteEvent
 
 from model.chatBot import ChatBot
 from engine import atri
-from model import sticker, acgTools
+from model import cmd, sticker, acgTools
 # from model.akinatorG import akinatorGame
 from model.weather import weather
+
+
+def markov_eval(res: Tuple):
+    text, eval_ = res
+    if not eval:
+        atri.markov.train(text=text)
+    return f"√|{text}" if eval_ else f"×|{text}"
 
 
 class GroupEvent:
@@ -73,6 +81,11 @@ class GroupEvent:
         if group.id in GroupEvent.shieldGroup:
             return
 
+        mk_gen = cmd(message.to_text(),"#mk",atri.markov.gen) # generate markov
+        mk_eval = cmd(message.to_text(),"#mke",markov_eval) # eval markov
+        cmd(message.to_text(),"#mkt",atri.markov.train) #train markov
+        chain = (mk_gen or mk_eval) and [Plain(mk_gen or mk_eval)]
+
         if GroupEvent.chatBot:
             if message.has(At) and atri.qq in [mb.target for mb in message.fetch(At)] and group.id not in atri.chatBot['shield']:
                 response = await GroupEvent.chat.chat(messagePlain)
@@ -86,9 +99,6 @@ class GroupEvent:
                     chain = [Plain(response['message'])]
                 else:
                     chain = [Plain(atri.chatBot['badRequest'])]
-
-        # if GroupEvent.Akinator:
-        #     await akinatorGame.process(messagePlain,group,member)
 
         if GroupEvent.conv:
             if not GroupEvent._at and messagePlain in GroupEvent.conversation['msg']:
