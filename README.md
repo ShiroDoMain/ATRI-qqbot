@@ -101,13 +101,17 @@ python3 ATRI.py
 - 查询天气  
 - 摸头
 - 基础闲聊 
-- 来点涩图
-- 还有好多好多功能(~~我忘了~~)
+- 来点涩图  
+- Markov生成:   
+  - #mk[消息]:通过已经学习的消息生成新的消息  
+  - #mke[消息]:对该消息进行预测评估  
+  - #mkt[消息]:对消息进行训练  
+- 还有好多好多功能(~~我忘了~~)  
 ## 使用须知  
 此开源项目遵循mirai社区规定开源协议AGPLv3  
-~~注意身体~~
+~~注意身体~~  
 
-## Note
+## Note  
 该项目使用[karas](https://github.com/ShiroDoMain/karas)sdk开发  
 另一开源项目[TimeBot](https://github.com/ShiroDoMain/TimeBot) ，可自行搭配使用 
 
@@ -115,7 +119,7 @@ python3 ATRI.py
 本项目使用[GNU AGPLv3](https://github.com/ShiroDoMain/ATRI-qqbot/blob/master/LICENSE) 协议作为开源许可证  
 
 ## 鸣谢
-感谢 [mamoe](https://github.com/mamoe) 的 [mirai](https://github.com/mamoe/mirai) 项目给我们带来了快乐
+感谢 [mamoe](https://github.com/mamoe) 的 [mirai](https://github.com/mamoe/mirai) 项目给我们带来了快乐  
 
 ## Changelog  
 >  \[2021-07-22]:腾讯ai关闭了机器人示例，删除对应的接口  
@@ -129,3 +133,4 @@ python3 ATRI.py
 >  \[2021-10-05]:去除网络天才功能，发布了一个可使用版本  
 >  \[2021-12-01]:添加好友消息事件  
 >  \[2022-05-08]:更换了[karas](https://github.com/ShiroDoMain/karas) 框架  
+>  \[2022-05-25]:新增Markov  

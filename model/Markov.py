@@ -60,8 +60,8 @@ class Markov:
             topic += suffix
             start = suffix
             if suffix == "。":
-                _t = text[-3:]+topic[:-1]
+                _t = text+topic[:-1]
                 return _t if not _eval else (_t, True)
             limit -= 1
-        _t = text[-3:]+topic
+        _t = text+topic
         return _t if not _eval else (_t, False)
