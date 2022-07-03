@@ -5,4 +5,4 @@ pillow
 aiohttp
 saucenao_api
 numpy
-matlibplot
+matplotlib
