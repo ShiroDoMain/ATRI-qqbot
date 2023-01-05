@@ -20,10 +20,6 @@ from model.Markov import Markov
 
 
 class ATRI:
-    """
-    ATRI的核心，一切都在这里开始
-    """
-
     def __init__(self):
         with open('cfg.json', 'r', encoding='utf-8') as cfg:
             self.cfg = json.load(cfg)
@@ -41,7 +37,7 @@ class ATRI:
             logToFile=self.botConfig.get("logToFile").get("enable"),
             logFileName=self.botConfig.get("logToFile").get("file") if self.botConfig.get("logToFile").get("enable") else None
         )
-        self.name = name if name != "" else self.bot.fetchBotProfile().nickname
+        self.name = name if name != "" else (await self.bot.fetchBotProfile()).nickname
 
         self.setu = self.cfg['setu']
         self.sticker = self.cfg['sticker']

@@ -5,7 +5,7 @@
 
 ## 使用注解  
 Hi！  
-这是一个基于 [mirai](https://github.com/mamoe/mirai) 框架协议，[karas](https://github.com/ShiroDoMain/karas) SDK和 [mirai-api-http](https://github.com/project-mirai/mirai-api-http) 的qqbot  
+这是一个基于 [mirai](https://github.com/mamoe/mirai) 框架协议，[karas SDK](https://github.com/ShiroDoMain/karas)和 [mirai-api-http](https://github.com/project-mirai/mirai-api-http) 的qqbot  
 PS: 使用本项目的前提您需要先启用一个mirai后端([mcl项目地址](https://github.com/iTXTech/mirai-console-loader))和[mah插件](https://github.com/project-mirai/mirai-api-http)  
 准备完成后使用使用git拉取本项目  
 ```shell script

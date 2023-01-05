@@ -1,0 +1,39 @@
+[Bot]
+# bot的主要信息
+host = "localhost"
+port = 8080
+verifyKey = ""
+account = 114514
+
+[Dirs]
+# 文件夹相关
+fonts = "./storage/Font"
+stickers = "./storage/sticker"
+temp = "./temp"
+
+[Database]
+# 数据库文件存放路径
+path = "./data.db"
+
+[Recorder]
+# 是否储存聊天记录
+# enable为true时为开启
+# bot为true时同时记录bot发送的消息
+# sync为true时记录同步消息
+GroupMessage.enable = true
+GroupMessage.bot = true
+GroupMessage.sync = true
+
+FriendMessage.enable = false
+FriendMessage.bot = false
+FriendMessage.sync = false
+
+TempMessage.enable = false
+TempMessage.bot = false
+TempMessage.sync = false
+
+StrangerMessage.enable = false
+StrangerMessage.bot = false
+StrangerMessage.sync = false
+
+

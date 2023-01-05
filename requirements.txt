@@ -1,8 +1,8 @@
-karas_py == 0.1.4
+karas_py
+toml
 moviepy
 requests
 pillow
 aiohttp
-saucenao_api
 numpy
 matplotlib
