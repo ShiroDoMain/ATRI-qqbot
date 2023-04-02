@@ -4,5 +4,5 @@ test*
 .vscode/
 __pycache__
 *.log
-
+bot.toml
 
