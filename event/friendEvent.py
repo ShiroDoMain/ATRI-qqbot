@@ -15,6 +15,10 @@ from karas.box import (
 )
 
 from model.chatBot import ChatBot
+from util.db import FriendMessages
+
+
+friend_db = FriendMessages()
 
 
 class FriendEvent:
@@ -24,6 +28,7 @@ class FriendEvent:
     @atri.bot.listen(__doc__)
     async def messageEvent(friend: Friend, message: MessageChain):
         _msg_text = "".join([msg.text.strip() for msg in message.fetch(Plain)]) if message.has(Plain) else ''
+        _chain = None
         if message.has(Plain):
             _chat_response = await ChatBot.chat(_msg_text)
             _chain = [Plain(_chat_response["message"] if _chat_response['status'] == 'success' else atri.chatBot['badRequest'])]

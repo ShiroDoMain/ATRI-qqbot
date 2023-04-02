@@ -2,4 +2,7 @@ test/
 test*
 .idea/
 .vscode/
+__pycache__
+*.log
+
 

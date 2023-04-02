@@ -35,11 +35,10 @@ async def offlineDropEvent():
     atri.bot.logging.error('Bot与服务器断开连接')
 
 
-
 class Core:
     @staticmethod
     def run():
         groupEvent.GroupEvent()
         friendEvent.FriendEvent()
         tempEvent.TempEvent()
-        atri.bot.run_forever() 
+        atri.bot.run_forever()

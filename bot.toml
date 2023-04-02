@@ -1,9 +1,12 @@
 [Bot]
-# bot的主要信息
-host = "localhost"
-port = 8080
-verifyKey = ""
-account = 114514
+# bot相关的配置
+host = "localhost"  # bot的服务器
+port = 8080  # 端口
+verifyKey = ""  # mah设置的verifyKey
+account = 114514  # bot的账号
+loggerLevel = "INFO"  # 输出日志等级
+logToFile = false  # 是否保存日志
+logRecordLevel = "DEBUG"  # 保存日志等级
 
 [Dirs]
 # 文件夹相关

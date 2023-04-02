@@ -1,6 +1,6 @@
 from typing import Dict, Union, Tuple
 from karas.box import BotProfile
-from sqlite3 import Connection
+from sqlite3 import Connection, connect
 import toml
 
 
@@ -14,8 +14,22 @@ class BotConfig(ConfigBase, BotProfile):
     host: str
     port: int
     verifyKey: str
-    qq: str
-    master: int
+    account: int
+    loggerLevel: str
+    logToFile: bool
+    logRecordLevel: str
+
+    @property
+    def raw_conf(self):
+        return {
+            "host": self.host,
+            "port": self.port,
+            "verifyKey": self.verifyKey,
+            "account": self.account,
+            "loggerLevel": self.loggerLevel,
+            "logToFile": self.logToFile,
+            "logRecordLevel": self.logRecordLevel,
+        }
 
     def setBotProfile(self, profile: BotProfile):
         for k, v in profile.raw.items():
@@ -30,6 +44,9 @@ class DirectoryConfig(ConfigBase):
 class DatabaseConfig(ConfigBase):
     path: str
 
+    def connect(self):
+        return connect(self.path)
+
 
 class _RecorderConfig(ConfigBase):
     enable: bool
@@ -38,26 +55,23 @@ class _RecorderConfig(ConfigBase):
 
 
 class RecoderConfig:
-    group_config: _RecorderConfig
-    friend_config: _RecorderConfig
-    temp_config: _RecorderConfig
-    stranger_config: _RecorderConfig
+    group: _RecorderConfig
+    friend: _RecorderConfig
+    temp: _RecorderConfig
+    stranger: _RecorderConfig
 
     def __init__(self, config: Dict):
-        self.group_config = _RecorderConfig(config.get("GroupMessage"))
-        self.friend_config = _RecorderConfig(config.get("FriendMessage"))
-        self.temp_config = _RecorderConfig(config.get("TempMessage"))
-        self.stranger_config = _RecorderConfig(config.get("StrangerMessage"))
+        self.group = _RecorderConfig(config.get("GroupMessage"))
+        self.friend = _RecorderConfig(config.get("FriendMessage"))
+        self.temp = _RecorderConfig(config.get("TempMessage"))
+        self.stranger = _RecorderConfig(config.get("StrangerMessage"))
 
 
+def load_config(file: str) -> Tuple[BotConfig, DirectoryConfig, DatabaseConfig, RecoderConfig]:
+    config: Dict = toml.load(open(file))
+    bot_config = BotConfig(config.get("Bot"))
+    dir_config = DirectoryConfig(config.get("Dirs"))
+    database_config = DatabaseConfig(config.get("Database"))
+    recoder_config = RecoderConfig(config.get("Recorder"))
 
-class Config:
-    @staticmethod
-    def load_config(file: str) -> Tuple[BotConfig, DirectoryConfig, DatabaseConfig, RecoderConfig]:
-        config: Dict = toml.load(file)
-        bot_config = BotConfig(config.get("Bot"))
-        dir_config = DirectoryConfig(config.get("Dirs"))
-        database_config = DatabaseConfig(config.get("Database"))
-        recoder_config = RecoderConfig(config.get("Recorder"))
-
-        return bot_config, dir_config, database_config, recoder_config
+    return bot_config, dir_config, database_config, recoder_config
